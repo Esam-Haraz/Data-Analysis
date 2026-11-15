@@ -1,7 +1,7 @@
 /* ============================================================================
    DESIGN SYSTEM v1.1 — SHARED PIPELINE ARCHITECTURE
    Author: Esam Haraz
-   Sites: Services Hub, AutoDeploy, Data Analysis, Portfolio
+   Path: Data-Analysis/assets/projects/ds.css
    ============================================================================ */
 
 /* ----------------------------------------------------------------------------
@@ -1529,12 +1529,6 @@ img, svg {
   justify-content: space-between;
   gap: var(--space-3);
   font-size: var(--text-sm);
-  color: var(--ink-muted);
-}
-
-.ds-ai-disclosure {
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
   color: var(--ink-muted);
 }
 
