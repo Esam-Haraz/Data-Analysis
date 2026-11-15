@@ -34,7 +34,7 @@
   <meta property="og:locale:alternate" content="ar_EG">
   <meta property="og:title" content="Data Analysis Portfolio — Esam Haraz">
   <meta property="og:description" content="Practical data analysis case studies in Logistics, HR, and Retail built with SQL, Excel, and Power BI on public Kaggle datasets.">
-  <meta property="og:url" id="meta-og-url" href="https://esam-haraz.github.io/Data-Analysis/" content="https://esam-haraz.github.io/Data-Analysis/">
+  <meta property="og:url" id="meta-og-url" content="https://esam-haraz.github.io/Data-Analysis/">
   <meta property="og:image" id="meta-og-image" content="https://esam-haraz.github.io/Data-Analysis/assets/og-cover.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -68,8 +68,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800&family=DM+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- Shared Design System v1.1 -->
-  <link rel="stylesheet" href="./assets/ds.css">
-  <script src="./assets/ds.js" defer></script>
+  <link rel="stylesheet" href="./assets/projects/ds.css">
+  <script src="./assets/projects/ds.js" defer></script>
 </head>
 <body>
   <a href="#main-content" class="ds-skip-link" data-i18n="skipToMain">Skip to main content</a>
@@ -155,7 +155,7 @@
         <div class="ds-spider-wrap">
           <div class="ds-spider-canvas" id="ds-spider-canvas">
 
-            <!-- Decorative Concentric Rings & Animated SVG Connectors (Desktop) -->
+            <!-- Concentric SVG Rings & Animated Connectors (Desktop) -->
             <svg class="ds-spider-svg" id="ds-spider-svg" aria-hidden="true">
               <circle class="ds-spider-ring" cx="500" cy="240" r="160"></circle>
               <circle class="ds-spider-ring" cx="500" cy="240" r="290"></circle>
@@ -188,7 +188,7 @@
             <div class="ds-spider-branches">
 
               <!-- Branch 0: Supply Chain -->
-              <a href="./projects/supply-chain/" class="ds-spider-node" data-branch="0">
+              <a href="./assets/projects/supply-chain/" class="ds-spider-node" data-branch="0">
                 <div>
                   <div class="ds-spider-node-top" style="margin-block-end: var(--space-2);">
                     <span class="ds-chip ds-chip-accent" data-i18n="p1Domain">Logistics</span>
@@ -214,7 +214,7 @@
               </a>
 
               <!-- Branch 1: HR Attrition -->
-              <a href="./projects/hr-attrition/" class="ds-spider-node" data-branch="1">
+              <a href="./assets/projects/hr-attrition/" class="ds-spider-node" data-branch="1">
                 <div>
                   <div class="ds-spider-node-top" style="margin-block-end: var(--space-2);">
                     <span class="ds-chip ds-chip-accent" data-i18n="p2Domain">HR</span>
@@ -241,7 +241,7 @@
               </a>
 
               <!-- Branch 2: Pizza Sales -->
-              <a href="./projects/pizza-sales/" class="ds-spider-node" data-branch="2">
+              <a href="./assets/projects/pizza-sales/" class="ds-spider-node" data-branch="2">
                 <div>
                   <div class="ds-spider-node-top" style="margin-block-end: var(--space-2);">
                     <span class="ds-chip ds-chip-accent" data-i18n="p3Domain">Retail</span>
@@ -407,9 +407,9 @@
         </div>
 
         <div class="ds-footer-links">
-          <a href="./projects/supply-chain/" class="ds-btn ds-btn-secondary" data-i18n="navSupplyChain">Supply Chain</a>
-          <a href="./projects/hr-attrition/" class="ds-btn ds-btn-secondary" data-i18n="navHr">HR Attrition</a>
-          <a href="./projects/pizza-sales/" class="ds-btn ds-btn-secondary" data-i18n="navPizza">Pizza Sales</a>
+          <a href="./assets/projects/supply-chain/" class="ds-btn ds-btn-secondary" data-i18n="navSupplyChain">Supply Chain</a>
+          <a href="./assets/projects/hr-attrition/" class="ds-btn ds-btn-secondary" data-i18n="navHr">HR Attrition</a>
+          <a href="./assets/projects/pizza-sales/" class="ds-btn ds-btn-secondary" data-i18n="navPizza">Pizza Sales</a>
           <a href="https://www.linkedin.com/in/esam-haraz-459925402" target="_blank" rel="noopener noreferrer" class="ds-btn ds-btn-secondary">LinkedIn ↗</a>
           <a href="mailto:esamv20@gmail.com" class="ds-btn ds-btn-secondary" data-contact-cta>esamv20@gmail.com</a>
         </div>
@@ -417,7 +417,6 @@
 
       <div class="ds-footer-bottom">
         <span data-i18n="copyright">© 2026 Esam Haraz.</span>
-        <span class="ds-ai-disclosure" data-i18n="aiDisclosure">Documentation written with AI assistance, reviewed by me</span>
       </div>
     </div>
   </footer>
@@ -471,8 +470,7 @@
         navSupplyChain: "Supply Chain",
         navHr: "HR Attrition",
         navPizza: "Pizza Sales",
-        copyright: "© 2026 Esam Haraz.",
-        aiDisclosure: "Documentation written with AI assistance, reviewed by me"
+        copyright: "© 2026 Esam Haraz."
       },
       ar: {
         skipToMain: "تخطي إلى المحتوى الرئيسي",
@@ -518,8 +516,7 @@
         navSupplyChain: "سلاسل الإمداد",
         navHr: "التسرب الوظيفي",
         navPizza: "مبيعات البيتزا",
-        copyright: "© 2026 عصام حراز.",
-        aiDisclosure: "تمت كتابة التوثيق بمساعدة الذكاء الاصطناعي ومراجعته بواسطتي"
+        copyright: "© 2026 عصام حراز."
       }
     };
   </script>
