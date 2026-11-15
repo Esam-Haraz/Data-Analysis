@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-site="data">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Single Site Config Block (Base URL, Navigation Graph & Contact Routing) -->
+  <script>
+    window.SITE_CONFIG = {
+      baseUrl: "https://esam-haraz.github.io/Data-Analysis/",
+      currentSiteId: "data",
+      sitesGraph: [
+        { id: "hub", labelEn: "Services Hub", labelAr: "المركز الرئيسي", url: "https://esam-haraz.github.io/hub/" },
+        { id: "autodeploy", labelEn: "AutoDeploy", labelAr: "AutoDeploy", url: "https://esam-haraz.github.io/AutoDeploy/" },
+        { id: "data", labelEn: "Data Analysis", labelAr: "تحليل البيانات", url: "./" },
+        { id: "portfolio", labelEn: "Portfolio", labelAr: "معرض الأعمال", url: "https://esam-haraz.github.io/portfolio/" }
+      ],
+      /* Swap this single value to the Hub contact page URL once the Hub repo is live */
+      hubContactUrl: "mailto:esamv20@gmail.com",
+      email: "esamv20@gmail.com",
+      linkedinUrl: "https://www.linkedin.com/in/esam-haraz-459925402"
+    };
+  </script>
+
+  <!-- Primary SEO & Canonical Metadata -->
+  <title>Data Analysis Portfolio — Esam Haraz</title>
+  <meta name="description" content="Data analysis case studies by Esam Haraz covering supply chain logistics, HR attrition, and retail sales using SQL, Excel, and Power BI.">
+  <meta name="author" content="Esam Haraz">
+  <link rel="canonical" id="meta-canonical" href="https://esam-haraz.github.io/Data-Analysis/">
+
+  <!-- Open Graph & Social Sharing Metadata -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="ar_EG">
+  <meta property="og:title" content="Data Analysis Portfolio — Esam Haraz">
+  <meta property="og:description" content="Practical data analysis case studies in Logistics, HR, and Retail built with SQL, Excel, and Power BI on public Kaggle datasets.">
+  <meta property="og:url" id="meta-og-url" href="https://esam-haraz.github.io/Data-Analysis/" content="https://esam-haraz.github.io/Data-Analysis/">
+  <meta property="og:image" id="meta-og-image" content="https://esam-haraz.github.io/Data-Analysis/assets/og-cover.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Data Analysis Portfolio — Esam Haraz">
+  <meta name="twitter:description" content="Practical data analysis case studies in Logistics, HR, and Retail built with SQL, Excel, and Power BI.">
+  <meta name="twitter:image" id="meta-twitter-image" content="https://esam-haraz.github.io/Data-Analysis/assets/og-cover.png">
+
+  <!-- Sync Canonical & OG URLs dynamically from SITE_CONFIG.baseUrl -->
+  <script>
+    (function () {
+      var base = (window.SITE_CONFIG && window.SITE_CONFIG.baseUrl) || "https://esam-haraz.github.io/Data-Analysis/";
+      if (!base.endsWith("/")) base += "/";
+      var canonical = document.getElementById("meta-canonical");
+      var ogUrl = document.getElementById("meta-og-url");
+      var ogImg = document.getElementById("meta-og-image");
+      var twImg = document.getElementById("meta-twitter-image");
+      if (canonical) canonical.setAttribute("href", base);
+      if (ogUrl) ogUrl.setAttribute("content", base);
+      if (ogImg) ogImg.setAttribute("content", base + "assets/og-cover.png");
+      if (twImg) twImg.setAttribute("content", base + "assets/og-cover.png");
+    })();
+  </script>
+
+  <!-- Inline Vector Favicon (Pipeline Amber #FFB020) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='4' y='4' width='56' height='56' rx='12' fill='%230D1F1A' stroke='%23FFB020' stroke-width='3'/%3E%3Crect x='16' y='34' width='8' height='16' rx='4' fill='%23FFB020'/%3E%3Crect x='28' y='24' width='8' height='26' rx='4' fill='%23FFB020'/%3E%3Crect x='40' y='15' width='8' height='35' rx='4' fill='%23FFB020'/%3E%3C/svg%3E">
+
+  <!-- Google Fonts: Bricolage Grotesque, Instrument Sans, DM Mono & IBM Plex Sans Arabic -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800&family=DM+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Shared Design System v1.1 -->
+  <link rel="stylesheet" href="./assets/ds.css">
+  <script src="./assets/ds.js" defer></script>
+</head>
+<body>
+  <a href="#main-content" class="ds-skip-link" data-i18n="skipToMain">Skip to main content</a>
+
+  <!-- Circular Language Transition Curtain (Wipe Motion) -->
+  <div class="ds-curtain" id="ds-curtain" aria-hidden="true">
+    <div class="ds-curtain-layer ds-curtain-outer" id="ds-curtain-outer"></div>
+    <div class="ds-curtain-layer ds-curtain-inner" id="ds-curtain-inner">
+      <span class="ds-curtain-sub" id="ds-curtain-sub">SWITCHING LANGUAGE</span>
+      <span class="ds-curtain-label" id="ds-curtain-label">DATA ANALYSIS</span>
+    </div>
+  </div>
+
+  <!-- Site Header with Mini Node-Graph Navigation & Mobile (<480px) Dropdown -->
+  <header class="ds-header">
+    <a href="./" class="ds-brand">
+      <span class="ds-brand-mark" aria-hidden="true"></span>
+      <span data-i18n="brandName">Esam Haraz</span>
+    </a>
+
+    <!-- Desktop & Tablet Mini Node-Graph (Static fallback included for No-JS) -->
+    <nav class="ds-mini-graph" id="ds-mini-graph" aria-label="Sites network navigation">
+      <a href="https://esam-haraz.github.io/hub/" class="ds-mini-node">
+        <span class="ds-mini-dot" aria-hidden="true"></span>
+        <span>Services Hub</span>
+      </a>
+      <span class="ds-mini-edge" aria-hidden="true"></span>
+      <a href="https://esam-haraz.github.io/AutoDeploy/" class="ds-mini-node">
+        <span class="ds-mini-dot" aria-hidden="true"></span>
+        <span>AutoDeploy</span>
+      </a>
+      <span class="ds-mini-edge" aria-hidden="true"></span>
+      <a href="./" class="ds-mini-node is-current" aria-current="page">
+        <span class="ds-mini-dot" aria-hidden="true"></span>
+        <span>Data Analysis</span>
+      </a>
+      <span class="ds-mini-edge" aria-hidden="true"></span>
+      <a href="https://esam-haraz.github.io/portfolio/" class="ds-mini-node">
+        <span class="ds-mini-dot" aria-hidden="true"></span>
+        <span>Portfolio</span>
+      </a>
+    </nav>
+
+    <!-- Mobile (<480px) Compact Dropdown Switcher -->
+    <div class="ds-nav-dropdown" id="ds-nav-dropdown">
+      <button type="button"
+              class="ds-nav-dropdown-btn"
+              id="ds-nav-dropdown-btn"
+              aria-expanded="false"
+              aria-controls="ds-nav-dropdown-menu">
+        Data ▾
+      </button>
+      <div class="ds-nav-dropdown-menu" id="ds-nav-dropdown-menu" role="menu">
+        <a href="https://esam-haraz.github.io/hub/" role="menuitem">Services Hub ↗</a>
+        <a href="https://esam-haraz.github.io/AutoDeploy/" role="menuitem">AutoDeploy ↗</a>
+        <a href="./" class="is-current" aria-current="page" role="menuitem">Data Analysis ●</a>
+        <a href="https://esam-haraz.github.io/portfolio/" role="menuitem">Portfolio ↗</a>
+      </div>
+    </div>
+
+    <!-- Theme & Language Controls -->
+    <div class="ds-header-controls">
+      <button type="button" class="ds-icon-btn" id="ds-theme-toggle" aria-pressed="false" aria-label="Switch to dark mode">
+        <span data-theme-label>Dark</span>
+      </button>
+      <button type="button" class="ds-icon-btn" id="ds-lang-toggle" aria-label="التبديل إلى اللغة العربية">
+        عربي
+      </button>
+    </div>
+  </header>
+
+  <!-- Thin Top Scroll Progress Bar -->
+  <div class="ds-top-progress" aria-hidden="true">
+    <div class="ds-top-progress-fill"></div>
+  </div>
+
+  <main id="main-content">
+    <!-- ======================================================================
+         HERO & RADIAL SPIDER NETWORK GRAPH
+         ====================================================================== -->
+    <section class="ds-section" aria-labelledby="hub-hero-title">
+      <div class="ds-container">
+        <div class="ds-spider-wrap">
+          <div class="ds-spider-canvas" id="ds-spider-canvas">
+
+            <!-- Decorative Concentric Rings & Animated SVG Connectors (Desktop) -->
+            <svg class="ds-spider-svg" id="ds-spider-svg" aria-hidden="true">
+              <circle class="ds-spider-ring" cx="500" cy="240" r="160"></circle>
+              <circle class="ds-spider-ring" cx="500" cy="240" r="290"></circle>
+              <circle class="ds-spider-ring" cx="500" cy="240" r="420"></circle>
+
+              <path class="ds-spider-edge-base" data-edge="0" d=""></path>
+              <path class="ds-spider-edge-fill" data-edge="0" d=""></path>
+
+              <path class="ds-spider-edge-base" data-edge="1" d=""></path>
+              <path class="ds-spider-edge-fill" data-edge="1" d=""></path>
+
+              <path class="ds-spider-edge-base" data-edge="2" d=""></path>
+              <path class="ds-spider-edge-fill" data-edge="2" d=""></path>
+            </svg>
+
+            <!-- Central Topic Node -->
+            <div class="ds-spider-center" id="ds-spider-center">
+              <div class="ds-chips-row" style="justify-content: center; margin-block-end: var(--space-3);">
+                <span class="ds-chip" data-i18n="practiceChip">Practice projects · public Kaggle datasets</span>
+              </div>
+              <h1 id="hub-hero-title" style="font-size: var(--text-hero); line-height: 1.15; margin-block-end: var(--space-3);" data-i18n="heroTitle">
+                Data Analysis
+              </h1>
+              <p style="color: var(--ink-muted); margin-inline: auto;" data-i18n="heroLead">
+                End-to-end data cleaning, SQL querying, and dashboard reporting across logistics, human resources, and retail operations. Select any connected node to inspect the full methodology, charts, and queries.
+              </p>
+            </div>
+
+            <!-- 3 Connected Case Study Nodes (Real <a> links for keyboard & No-JS) -->
+            <div class="ds-spider-branches">
+
+              <!-- Branch 0: Supply Chain -->
+              <a href="./projects/supply-chain/" class="ds-spider-node" data-branch="0">
+                <div>
+                  <div class="ds-spider-node-top" style="margin-block-end: var(--space-2);">
+                    <span class="ds-chip ds-chip-accent" data-i18n="p1Domain">Logistics</span>
+                    <div class="ds-chips-row">
+                      <span class="ds-chip">Excel</span>
+                      <span class="ds-chip">PostgreSQL</span>
+                    </div>
+                  </div>
+                  <h2 class="ds-spider-node-title" data-i18n="p1Title">
+                    Supply Chain &amp; Shipment Deliveries Analysis
+                  </h2>
+                </div>
+
+                <div class="ds-spider-stat" data-i18n="p1Stat">
+                  Stormy weather: 41.45% delays vs 16.02% in cold weather
+                </div>
+
+                <p class="ds-spider-extra" data-i18n="p1Extra">
+                  25,000 shipments evaluated across weather conditions, partner-vehicle pairs, delivery modes, and distance-to-cost scaling.
+                </p>
+
+                <span class="ds-spider-cta" data-i18n="openCaseStudy">Open case study →</span>
+              </a>
+
+              <!-- Branch 1: HR Attrition -->
+              <a href="./projects/hr-attrition/" class="ds-spider-node" data-branch="1">
+                <div>
+                  <div class="ds-spider-node-top" style="margin-block-end: var(--space-2);">
+                    <span class="ds-chip ds-chip-accent" data-i18n="p2Domain">HR</span>
+                    <div class="ds-chips-row">
+                      <span class="ds-chip">SQL</span>
+                      <span class="ds-chip">Excel</span>
+                      <span class="ds-chip">Power BI</span>
+                    </div>
+                  </div>
+                  <h2 class="ds-spider-node-title" data-i18n="p2Title">
+                    IBM HR Analytics: Employee Attrition &amp; Performance
+                  </h2>
+                </div>
+
+                <div class="ds-spider-stat" data-i18n="p2Stat">
+                  Overtime: 31% attrition vs 10% without overtime
+                </div>
+
+                <p class="ds-spider-extra" data-i18n="p2Extra">
+                  1,470 employee records analyzed across overtime load, job roles, monthly income gaps, job satisfaction, and work-life balance.
+                </p>
+
+                <span class="ds-spider-cta" data-i18n="openCaseStudy">Open case study →</span>
+              </a>
+
+              <!-- Branch 2: Pizza Sales -->
+              <a href="./projects/pizza-sales/" class="ds-spider-node" data-branch="2">
+                <div>
+                  <div class="ds-spider-node-top" style="margin-block-end: var(--space-2);">
+                    <span class="ds-chip ds-chip-accent" data-i18n="p3Domain">Retail</span>
+                    <div class="ds-chips-row">
+                      <span class="ds-chip">Excel</span>
+                      <span class="ds-chip">SQL</span>
+                      <span class="ds-chip">Power BI</span>
+                    </div>
+                  </div>
+                  <h2 class="ds-spider-node-title" data-i18n="p3Title">
+                    Pizza Sales Performance &amp; Operations Analytics (2015)
+                  </h2>
+                </div>
+
+                <div class="ds-spider-stat" data-i18n="p3Stat">
+                  $817.86K revenue · 21,350 orders
+                </div>
+
+                <p class="ds-spider-extra" data-i18n="p3Extra">
+                  49,574 pizzas across 21,350 orders segmented by peak operating days, category share, pizza sizes, and top menu items.
+                </p>
+
+                <span class="ds-spider-cta" data-i18n="openCaseStudy">Open case study →</span>
+              </a>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION: WHAT I DO
+         ====================================================================== -->
+    <section class="ds-section" id="what-i-do" aria-labelledby="what-title">
+      <div class="ds-container">
+        <div class="ds-section-header">
+          <h2 class="ds-section-title" id="what-title" data-i18n="whatTitle">What I do</h2>
+          <p class="ds-section-desc" data-i18n="whatDesc">
+            Focused data preparation, querying, and reporting workflows built around clear business questions.
+          </p>
+        </div>
+
+        <div class="ds-services-grid">
+          <article class="ds-node">
+            <div class="ds-node-header">
+              <span>Excel · Power BI · DAX</span>
+            </div>
+            <div class="ds-node-body">
+              <h3 style="font-size: var(--text-h3); margin-block-end: var(--space-2);" data-i18n="srv1Title">
+                Power BI &amp; Excel dashboards
+              </h3>
+              <p style="color: var(--ink-muted); font-size: var(--text-sm);" data-i18n="srv1Body">
+                Interactive dashboards with Pivot Tables, slicers, and DAX measures structured to track KPIs and compare operational segments clearly.
+              </p>
+            </div>
+          </article>
+
+          <article class="ds-node">
+            <div class="ds-node-header">
+              <span>PostgreSQL · SQL Server</span>
+            </div>
+            <div class="ds-node-body">
+              <h3 style="font-size: var(--text-h3); margin-block-end: var(--space-2);" data-i18n="srv2Title">
+                SQL analysis &amp; reporting
+              </h3>
+              <p style="color: var(--ink-muted); font-size: var(--text-sm);" data-i18n="srv2Body">
+                Relational queries using aggregations, conditional logic, and grouping to answer operational questions and verify spreadsheet totals.
+              </p>
+            </div>
+          </article>
+
+          <article class="ds-node">
+            <div class="ds-node-header">
+              <span>Power Query · CSV · Validation</span>
+            </div>
+            <div class="ds-node-body">
+              <h3 style="font-size: var(--text-h3); margin-block-end: var(--space-2);" data-i18n="srv3Title">
+                Data cleaning &amp; preparation
+              </h3>
+              <p style="color: var(--ink-muted); font-size: var(--text-sm);" data-i18n="srv3Body">
+                Auditing raw tables for duplicate keys, broken types, and zeroed columns before modeling, while documenting data limitations transparently.
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION: HOW I WORK (4-NODE PIPELINE)
+         ====================================================================== -->
+    <section class="ds-section" id="how-i-work" aria-labelledby="how-title">
+      <div class="ds-container">
+        <div class="ds-section-header">
+          <h2 class="ds-section-title" id="how-title" data-i18n="howTitle">How I work</h2>
+          <p class="ds-section-desc" data-i18n="howDesc">
+            Every project follows a reproducible four-stage pipeline from raw table inspection to final visual reporting.
+          </p>
+        </div>
+
+        <div class="ds-pipeline-row">
+          <div class="ds-pipeline-step">
+            <span class="ds-step-badge">Step 01</span>
+            <h3 style="font-size: var(--text-h3);" data-i18n="step1Title">Raw data</h3>
+            <p style="font-size: var(--text-sm); color: var(--ink-muted);" data-i18n="step1Body">
+              Inspect source CSV files, row counts, data types, and primary key integrity before writing queries.
+            </p>
+          </div>
+
+          <div class="ds-pipeline-step">
+            <span class="ds-step-badge">Step 02</span>
+            <h3 style="font-size: var(--text-h3);" data-i18n="step2Title">Clean</h3>
+            <p style="font-size: var(--text-sm); color: var(--ink-muted);" data-i18n="step2Body">
+              Standardize fields in Excel or Power Query, resolve key issues, and record any unusable columns.
+            </p>
+          </div>
+
+          <div class="ds-pipeline-step">
+            <span class="ds-step-badge">Step 03</span>
+            <h3 style="font-size: var(--text-h3);" data-i18n="step3Title">Analyze</h3>
+            <p style="font-size: var(--text-sm); color: var(--ink-muted);" data-i18n="step3Body">
+              Run structured SQL queries and Pivot summaries to isolate patterns, segment differences, and outliers.
+            </p>
+          </div>
+
+          <div class="ds-pipeline-step">
+            <span class="ds-step-badge">Step 04</span>
+            <h3 style="font-size: var(--text-h3);" data-i18n="step4Title">Dashboard</h3>
+            <p style="font-size: var(--text-sm); color: var(--ink-muted);" data-i18n="step4Body">
+              Present verified findings in focused Excel or Power BI dashboards with interactive filters.
+            </p>
+          </div>
+        </div>
+
+        <!-- Single Contact CTA (Bound to SITE_CONFIG.hubContactUrl -> mailto: until Hub is live) -->
+        <div style="margin-block-start: var(--space-6); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-4); background-color: var(--bg-surface); border: 1.5px solid var(--rule-strong); border-radius: var(--radius-lg); padding: var(--space-5);">
+          <div>
+            <h3 style="font-size: var(--text-h3); margin-block-end: var(--space-1);" data-i18n="ctaBoxTitle">
+              Have a dataset or reporting workflow to discuss?
+            </h3>
+            <p style="font-size: var(--text-sm); color: var(--ink-muted);" data-i18n="ctaBoxDesc">
+              Reach out directly by email for data cleaning, SQL reporting, or dashboard projects.
+            </p>
+          </div>
+          <a href="mailto:esamv20@gmail.com" class="ds-btn ds-btn-primary" data-contact-cta data-i18n="ctaBoxBtn">
+            Contact Esam Haraz →
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="ds-footer">
+    <div class="ds-container">
+      <div class="ds-footer-grid">
+        <div>
+          <strong style="font-family: var(--font-display); font-size: 1.05rem;" data-i18n="brandName">Esam Haraz</strong>
+          <p style="font-size: var(--text-sm); color: var(--ink-muted); margin-block-start: var(--space-1);" data-i18n="footerTagline">
+            Data Analysis Portfolio · SQL, Excel &amp; Power BI
+          </p>
+        </div>
+
+        <div class="ds-footer-links">
+          <a href="./projects/supply-chain/" class="ds-btn ds-btn-secondary" data-i18n="navSupplyChain">Supply Chain</a>
+          <a href="./projects/hr-attrition/" class="ds-btn ds-btn-secondary" data-i18n="navHr">HR Attrition</a>
+          <a href="./projects/pizza-sales/" class="ds-btn ds-btn-secondary" data-i18n="navPizza">Pizza Sales</a>
+          <a href="https://www.linkedin.com/in/esam-haraz-459925402" target="_blank" rel="noopener noreferrer" class="ds-btn ds-btn-secondary">LinkedIn ↗</a>
+          <a href="mailto:esamv20@gmail.com" class="ds-btn ds-btn-secondary" data-contact-cta>esamv20@gmail.com</a>
+        </div>
+      </div>
+
+      <div class="ds-footer-bottom">
+        <span data-i18n="copyright">© 2026 Esam Haraz.</span>
+        <span class="ds-ai-disclosure" data-i18n="aiDisclosure">Documentation written with AI assistance, reviewed by me</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       BILINGUAL DICTIONARY (EN & AR) — CONSOLIDATED FOR EASY REVIEW
+       ========================================================================== -->
+  <script>
+    window.PAGE_I18N = {
+      en: {
+        skipToMain: "Skip to main content",
+        brandName: "Esam Haraz",
+        practiceChip: "Practice projects · public Kaggle datasets",
+        heroTitle: "Data Analysis",
+        heroLead: "End-to-end data cleaning, SQL querying, and dashboard reporting across logistics, human resources, and retail operations. Select any connected node to inspect the full methodology, charts, and queries.",
+        p1Domain: "Logistics",
+        p1Title: "Supply Chain & Shipment Deliveries Analysis",
+        p1Stat: "Stormy weather: 41.45% delays vs 16.02% in cold weather",
+        p1Extra: "25,000 shipments evaluated across weather conditions, partner-vehicle pairs, delivery modes, and distance-to-cost scaling.",
+        p2Domain: "HR",
+        p2Title: "IBM HR Analytics: Employee Attrition & Performance",
+        p2Stat: "Overtime: 31% attrition vs 10% without overtime",
+        p2Extra: "1,470 employee records analyzed across overtime load, job roles, monthly income gaps, job satisfaction, and work-life balance.",
+        p3Domain: "Retail",
+        p3Title: "Pizza Sales Performance & Operations Analytics (2015)",
+        p3Stat: "$817.86K revenue · 21,350 orders",
+        p3Extra: "49,574 pizzas across 21,350 orders segmented by peak operating days, category share, pizza sizes, and top menu items.",
+        openCaseStudy: "Open case study →",
+        whatTitle: "What I do",
+        whatDesc: "Focused data preparation, querying, and reporting workflows built around clear business questions.",
+        srv1Title: "Power BI & Excel dashboards",
+        srv1Body: "Interactive dashboards with Pivot Tables, slicers, and DAX measures structured to track KPIs and compare operational segments clearly.",
+        srv2Title: "SQL analysis & reporting",
+        srv2Body: "Relational queries using aggregations, conditional logic, and grouping to answer operational questions and verify spreadsheet totals.",
+        srv3Title: "Data cleaning & preparation",
+        srv3Body: "Auditing raw tables for duplicate keys, broken types, and zeroed columns before modeling, while documenting data limitations transparently.",
+        howTitle: "How I work",
+        howDesc: "Every project follows a reproducible four-stage pipeline from raw table inspection to final visual reporting.",
+        step1Title: "Raw data",
+        step1Body: "Inspect source CSV files, row counts, data types, and primary key integrity before writing queries.",
+        step2Title: "Clean",
+        step2Body: "Standardize fields in Excel or Power Query, resolve key issues, and record any unusable columns.",
+        step3Title: "Analyze",
+        step3Body: "Run structured SQL queries and Pivot summaries to isolate patterns, segment differences, and outliers.",
+        step4Title: "Dashboard",
+        step4Body: "Present verified findings in focused Excel or Power BI dashboards with interactive filters.",
+        ctaBoxTitle: "Have a dataset or reporting workflow to discuss?",
+        ctaBoxDesc: "Reach out directly by email for data cleaning, SQL reporting, or dashboard projects.",
+        ctaBoxBtn: "Contact Esam Haraz →",
+        footerTagline: "Data Analysis Portfolio · SQL, Excel & Power BI",
+        navSupplyChain: "Supply Chain",
+        navHr: "HR Attrition",
+        navPizza: "Pizza Sales",
+        copyright: "© 2026 Esam Haraz.",
+        aiDisclosure: "Documentation written with AI assistance, reviewed by me"
+      },
+      ar: {
+        skipToMain: "تخطي إلى المحتوى الرئيسي",
+        brandName: "عصام حراز",
+        practiceChip: "مشاريع تدريبية · مجموعات بيانات عامة من Kaggle",
+        heroTitle: "تحليل البيانات",
+        heroLead: "تنظيف البيانات واستعلامات SQL وبناء لوحات المعلومات التفاعلية عبر مجالات الإمداد والموارد البشرية ومبيعات التجزئة. اختر أي عقدة متصلة لاستعراض المنهجية والنتائج والاستعلامات كاملة.",
+        p1Domain: "الخدمات اللوجستية",
+        p1Title: "تحليل سلاسل الإمداد وتسليم الشحنات",
+        p1Stat: "الطقس العاصف: 41.45% تأخير مقابل 16.02% في الطقس البارد",
+        p1Extra: "تحليل 25,000 شحنة عبر حالات الطقس، وشركاء التوصيل والمركبات، وأوضاع الشحن، والعلاقة الخطية بين المسافة والتكلفة.",
+        p2Domain: "الموارد البشرية",
+        p2Title: "تحليل بيانات الموارد البشرية: التسرب الوظيفي والأداء",
+        p2Stat: "العمل الإضافي: 31% تسرب وظيفي مقابل 10% بدون عمل إضافي",
+        p2Extra: "دراسة سجلات 1,470 موظفاً لتحليل تأثير العمل الإضافي، والمسميات الوظيفية، وفجوة الدخل الشهري، والرضا الوظيفي والتوازن بين العمل والحياة.",
+        p3Domain: "التجزئة",
+        p3Title: "تحليل أداء مبيعات البيتزا والعمليات التشغيلية (2015)",
+        p3Stat: "817.86 ألف دولار إيرادات · 21,350 طلب",
+        p3Extra: "تحليل 49,574 قطعة بيتزا عبر 21,350 طلباً لتحديد أيام الذروة، وحصة الفئات والأحجام، والأصناف الأعلى والأقل إيراداً.",
+        openCaseStudy: "فتح دراسة الحالة ←",
+        whatTitle: "ما أقدمه",
+        whatDesc: "تجهيز البيانات وتحليلها وبناء تقارير واضحة للإجابة عن أسئلة العمل التشغيلية.",
+        srv1Title: "لوحات معلومات Power BI و Excel",
+        srv1Body: "لوحات تفاعلية باستخدام Pivot Tables وعوامل التصفية (Slicers) ومعادلات DAX لمتابعة المؤشرات الرئيسية ومقارنة الشرائح التشغيلية بوضوح.",
+        srv2Title: "تحليل وتقارير SQL",
+        srv2Body: "كتابة استعلامات تحليلية في PostgreSQL و SQL Server للتجميع والتصنيف واستخراج المؤشرات والتحقق من دقة نتائج الجداول.",
+        srv3Title: "تنظيف البيانات وتجهيزها",
+        srv3Body: "فحص الجداول الخام لمعالجة المفاتيح المكررة وتوحيد الصيغ ورصد الأعمدة الفارغة أو الصفرية وتوثيق قيود البيانات بشفافية قبل التحليل.",
+        howTitle: "منهجية العمل",
+        howDesc: "يتبع كل مشروع مساراً واضحاً من أربع مراحل متسلسلة بدءاً من فحص البيانات الخام وحتى لوحة المعلومات النهائية.",
+        step1Title: "البيانات الخام",
+        step1Body: "فحص ملفات CSV المصدرية وعدد الصفوف وأنواع البيانات وسلامة المفاتيح الأساسية قبل كتابة الاستعلامات.",
+        step2Title: "التنظيف",
+        step2Body: "توحيد الحقول في Excel أو Power Query، ومعالجة مشكلات المفاتيح، وتوثيق أي أعمدة غير صالحة للاستخدام.",
+        step3Title: "التحليل",
+        step3Body: "تنفيذ استعلامات SQL وجداول Pivot لاستخلاص الأنماط والفروقات بين الشرائح والقيم الشاذة.",
+        step4Title: "لوحة المعلومات",
+        step4Body: "عرض النتائج الموثقة في لوحات Excel أو Power BI مركزة مع فلاتر تفاعلية.",
+        ctaBoxTitle: "هل لديك بيانات أو تقرير ترغب في مناقشته؟",
+        ctaBoxDesc: "تواصل مباشرة عبر البريد الإلكتروني لمشاريع تنظيف البيانات أو تقارير SQL أو لوحات المعلومات.",
+        ctaBoxBtn: "تواصل مع عصام حراز ←",
+        footerTagline: "معرض أعمال تحليل البيانات · SQL و Excel و Power BI",
+        navSupplyChain: "سلاسل الإمداد",
+        navHr: "التسرب الوظيفي",
+        navPizza: "مبيعات البيتزا",
+        copyright: "© 2026 عصام حراز.",
+        aiDisclosure: "تمت كتابة التوثيق بمساعدة الذكاء الاصطناعي ومراجعته بواسطتي"
+      }
+    };
+  </script>
+</body>
+</html>
