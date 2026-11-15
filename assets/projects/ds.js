@@ -1,9 +1,7 @@
 /* ============================================================================
    DESIGN SYSTEM v1.1 — SHARED PIPELINE ENGINE (VANILLA JS, ZERO DEPENDENCIES)
    Author: Esam Haraz
-   Handles: Theme toggle, Bilingual EN/AR + RTL circular wipe, Mini-graph nav &
-            mobile dropdown, Radial spider SVG edges, Scroll rail & connectors,
-            Zero-baseline bar chart reveal, Accessible image lightbox & fallback.
+   Path: Data-Analysis/assets/projects/ds.js
    ============================================================================ */
 
 (function () {
@@ -146,7 +144,6 @@
       }
     }
 
-    // Bind dynamic Hub/Contact CTAs
     document.querySelectorAll("[data-contact-cta]").forEach((el) => {
       el.setAttribute("href", CFG.hubContactUrl || ("mailto:" + CFG.email));
     });
@@ -260,7 +257,6 @@
     applyTheme(currentTheme, false);
     hydrateNavigation();
 
-    // Re-layout radial spider SVG connectors after RTL/LTR reflow
     window.requestAnimationFrame(() => {
       layoutSpiderGraph(false);
     });
@@ -363,7 +359,6 @@
     const cx = centerRect.left - cRect.left + centerRect.width / 2;
     const cy = centerRect.top - cRect.top + centerRect.height / 2;
 
-    // Position concentric SVG guide rings centered on the central topic node
     const rings = svg.querySelectorAll(".ds-spider-ring");
     const maxR = Math.max(cRect.width, cRect.height) * 0.46;
     rings.forEach((ring, idx) => {
@@ -372,7 +367,6 @@
       ring.setAttribute("r", Math.round(maxR * ((idx + 1) / rings.length)));
     });
 
-    // Compute orthogonal-curved pipeline paths from center node ports to each branch
     branches.forEach((branchEl) => {
       const idx = branchEl.getAttribute("data-branch");
       const basePath = svg.querySelector(`.ds-spider-edge-base[data-edge="${idx}"]`);
@@ -393,7 +387,6 @@
       const dy = by - cy;
 
       if (Math.abs(dx) > Math.abs(dy)) {
-        // Horizontal left/right branches (naturally swaps in RTL!)
         const dirSign = dx > 0 ? 1 : -1;
         startX = cx + dirSign * (centerRect.width / 2);
         startY = cy;
@@ -402,7 +395,6 @@
         const midX = (startX + endX) / 2;
         d = `M ${startX.toFixed(1)} ${startY.toFixed(1)} C ${midX.toFixed(1)} ${startY.toFixed(1)}, ${midX.toFixed(1)} ${endY.toFixed(1)}, ${endX.toFixed(1)} ${endY.toFixed(1)}`;
       } else {
-        // Vertical bottom branch
         startX = cx;
         startY = cy + centerRect.height / 2;
         endX = bx;
@@ -430,7 +422,6 @@
 
     const branches = Array.from(canvas.querySelectorAll(".ds-spider-node[data-branch]"));
 
-    // Hover & keyboard focus highlights corresponding SVG edge (fill motion, no lift)
     branches.forEach((branchEl) => {
       const idx = branchEl.getAttribute("data-branch");
       const fillPath = svg.querySelector(`.ds-spider-edge-fill[data-edge="${idx}"]`);
@@ -445,7 +436,6 @@
       branchEl.addEventListener("blur", deactivate);
     });
 
-    // Orchestrated connect animation on initial load (< 1.5s, once per session, skippable)
     let alreadyPlayed = false;
     try {
       alreadyPlayed = sessionStorage.getItem(SESSION_INTRO_KEY) === "1";
@@ -477,7 +467,6 @@
       };
       skipEvents.forEach((evt) => window.addEventListener(evt, onSkip, { passive: true, once: true }));
 
-      // Staggered connect draw completing under 1.2s total
       edges.forEach((edge, i) => {
         window.setTimeout(() => {
           if (spiderIntroSkipped) return;
@@ -528,7 +517,6 @@
 
       docEl.style.setProperty("--scroll-progress", progress.toFixed(4));
 
-      // Update vertical pipeline rail nodes on case study pages
       if (railSections.length > 0) {
         const triggerY = window.innerHeight * 0.36;
         let activeIdx = 0;
@@ -546,7 +534,6 @@
         });
       }
 
-      // Fill pipeline connectors as they enter viewport
       scrollConnectors.forEach((svgEl) => {
         const path = svgEl.querySelector(".ds-connector-fill");
         if (!path) return;
@@ -596,10 +583,19 @@
   }
 
   /* --------------------------------------------------------------------------
-     8. ACCESSIBLE IMAGE LIGHTBOX & MISSING ASSET PLACEHOLDER
+     8. ACCESSIBLE IMAGE LIGHTBOX, ACCORDION INDICATORS & MISSING FALLBACK
      -------------------------------------------------------------------------- */
+  function setupDetailsIndicators() {
+    document.querySelectorAll(".ds-details").forEach((detailsEl) => {
+      const indicator = detailsEl.querySelector(".ds-summary-indicator");
+      if (!indicator) return;
+      detailsEl.addEventListener("toggle", () => {
+        indicator.textContent = detailsEl.open ? "−" : "+";
+      });
+    });
+  }
+
   function setupLightboxAndImages() {
-    // Graceful fallback if any .webp screenshot has not been placed yet
     document.querySelectorAll("img[data-asset-name]").forEach((img) => {
       function handleBrokenImage() {
         if (img.dataset.fallbackApplied === "1") return;
@@ -633,7 +629,7 @@
 
     function openLightbox(triggerBtn) {
       const img = triggerBtn.querySelector("img");
-      if (!img) return; // Do not open lightbox if image failed to load
+      if (!img) return;
       lastFocusedTrigger = triggerBtn;
 
       const src = img.currentSrc || img.getAttribute("src");
@@ -676,7 +672,6 @@
         e.preventDefault();
         closeLightbox();
       } else if (e.key === "Tab") {
-        // Keep focus trapped on the Close button inside modal
         e.preventDefault();
         lbClose.focus();
       }
@@ -706,6 +701,7 @@
     setupSpiderInteractions();
     setupScrollTracking();
     setupBarCharts();
+    setupDetailsIndicators();
     setupLightboxAndImages();
 
     const themeBtn = document.getElementById("ds-theme-toggle");
