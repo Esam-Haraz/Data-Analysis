@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-site="data">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Single Site Config Block -->
+  <script>
+    window.SITE_CONFIG = {
+      baseUrl: "https://esam-haraz.github.io/Data-Analysis/",
+      currentSiteId: "data",
+      sitesGraph: [
+        { id: "hub", labelEn: "Services Hub", labelAr: "المركز الرئيسي", url: "https://esam-haraz.github.io/hub/" },
+        { id: "autodeploy", labelEn: "AutoDeploy", labelAr: "AutoDeploy", url: "https://esam-haraz.github.io/AutoDeploy/" },
+        { id: "data", labelEn: "Data Analysis", labelAr: "تحليل البيانات", url: "../../../" },
+        { id: "portfolio", labelEn: "Portfolio", labelAr: "معرض الأعمال", url: "https://esam-haraz.github.io/portfolio/" }
+      ],
+      hubContactUrl: "mailto:esamv20@gmail.com",
+      email: "esamv20@gmail.com",
+      linkedinUrl: "https://www.linkedin.com/in/esam-haraz-459925402"
+    };
+  </script>
+
+  <!-- Primary SEO & Canonical Metadata -->
+  <title>IBM HR Analytics: Employee Attrition &amp; Performance — Esam Haraz</title>
+  <meta name="description" content="HR attrition analysis across 1,470 fictional employee records examining overtime, job roles, monthly income gaps, job satisfaction, and work-life balance using SQL, Excel, and Power BI.">
+  <meta name="author" content="Esam Haraz">
+  <link rel="canonical" id="meta-canonical" href="https://esam-haraz.github.io/Data-Analysis/assets/projects/hr-attrition/">
+
+  <!-- Open Graph & Social Sharing Metadata -->
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="ar_EG">
+  <meta property="og:title" content="IBM HR Analytics: Employee Attrition &amp; Performance — Esam Haraz">
+  <meta property="og:description" content="HR case study analyzing 1,470 employee records with SQL queries, Excel Pivot Tables, and Power BI DAX measures.">
+  <meta property="og:url" id="meta-og-url" content="https://esam-haraz.github.io/Data-Analysis/assets/projects/hr-attrition/">
+  <meta property="og:image" id="meta-og-image" content="https://esam-haraz.github.io/Data-Analysis/assets/projects/hr-attrition/PowerBi_Dashboard.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="IBM HR Analytics: Employee Attrition &amp; Performance — Esam Haraz">
+  <meta name="twitter:description" content="HR case study analyzing 1,470 employee records with SQL queries, Excel Pivot Tables, and Power BI DAX measures.">
+  <meta name="twitter:image" id="meta-twitter-image" content="https://esam-haraz.github.io/Data-Analysis/assets/projects/hr-attrition/PowerBi_Dashboard.webp">
+
+  <script>
+    (function () {
+      var base = (window.SITE_CONFIG && window.SITE_CONFIG.baseUrl) || "https://esam-haraz.github.io/Data-Analysis/";
+      if (!base.endsWith("/")) base += "/";
+      var pageUrl = base + "assets/projects/hr-attrition/";
+      var imgUrl = base + "assets/projects/hr-attrition/PowerBi_Dashboard.webp";
+      var canonical = document.getElementById("meta-canonical");
+      var ogUrl = document.getElementById("meta-og-url");
+      var ogImg = document.getElementById("meta-og-image");
+      var twImg = document.getElementById("meta-twitter-image");
+      if (canonical) canonical.setAttribute("href", pageUrl);
+      if (ogUrl) ogUrl.setAttribute("content", pageUrl);
+      if (ogImg) ogImg.setAttribute("content", imgUrl);
+      if (twImg) twImg.setAttribute("content", imgUrl);
+    })();
+  </script>
+
+  <!-- Inline Vector Favicon (Pipeline Amber #FFB020) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='4' y='4' width='56' height='56' rx='12' fill='%230D1F1A' stroke='%23FFB020' stroke-width='3'/%3E%3Crect x='16' y='34' width='8' height='16' rx='4' fill='%23FFB020'/%3E%3Crect x='28' y='24' width='8' height='26' rx='4' fill='%23FFB020'/%3E%3Crect x='40' y='15' width='8' height='35' rx='4' fill='%23FFB020'/%3E%3C/svg%3E">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800&family=DM+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Shared Design System v1.1 -->
+  <link rel="stylesheet" href="../../ds.css">
+  <script src="../../ds.js" defer></script>
+</head>
+<body class="has-rail">
+  <a href="#main-content" class="ds-skip-link" data-i18n="skipToMain">Skip to main content</a>
+
+  <!-- Circular Language Transition Curtain -->
+  <div class="ds-curtain" id="ds-curtain" aria-hidden="true">
+    <div class="ds-curtain-layer ds-curtain-outer" id="ds-curtain-outer"></div>
+    <div class="ds-curtain-layer ds-curtain-inner" id="ds-curtain-inner">
+      <span class="ds-curtain-sub" id="ds-curtain-sub">SWITCHING LANGUAGE</span>
+      <span class="ds-curtain-label" id="ds-curtain-label">DATA ANALYSIS</span>
+    </div>
+  </div>
+
+  <!-- Site Header -->
+  <header class="ds-header">
+    <a href="../../../" class="ds-brand">
+      <span class="ds-brand-mark" aria-hidden="true"></span>
+      <span data-i18n="brandName">Esam Haraz</span>
+    </a>
+
+    <nav class="ds-mini-graph" id="ds-mini-graph" aria-label="Sites network navigation">
+      <a href="https://esam-haraz.github.io/hub/" class="ds-mini-node">
+        <span class="ds-mini-dot" aria-hidden="true"></span>
+        <span>Services Hub</span>
+      </a>
+      <span class="ds-mini-edge" aria-hidden="true"></span>
+      <a href="https://esam-haraz.github.io/AutoDeploy/" class="ds-mini-node">
+        <span class="ds-mini-dot" aria-hidden="true"></span>
+        <span>AutoDeploy</span>
+      </a>
+      <span class="ds-mini-edge" aria-hidden="true"></span>
+      <a href="../../../" class="ds-mini-node is-current" aria-current="page">
+        <span class="ds-mini-dot" aria-hidden="true"></span>
+        <span>Data Analysis</span>
+      </a>
+      <span class="ds-mini-edge" aria-hidden="true"></span>
+      <a href="https://esam-haraz.github.io/portfolio/" class="ds-mini-node">
+        <span class="ds-mini-dot" aria-hidden="true"></span>
+        <span>Portfolio</span>
+      </a>
+    </nav>
+
+    <div class="ds-nav-dropdown" id="ds-nav-dropdown">
+      <button type="button"
+              class="ds-nav-dropdown-btn"
+              id="ds-nav-dropdown-btn"
+              aria-expanded="false"
+              aria-controls="ds-nav-dropdown-menu">
+        Data ▾
+      </button>
+      <div class="ds-nav-dropdown-menu" id="ds-nav-dropdown-menu" role="menu">
+        <a href="https://esam-haraz.github.io/hub/" role="menuitem">Services Hub ↗</a>
+        <a href="https://esam-haraz.github.io/AutoDeploy/" role="menuitem">AutoDeploy ↗</a>
+        <a href="../../../" class="is-current" aria-current="page" role="menuitem">Data Analysis ●</a>
+        <a href="https://esam-haraz.github.io/portfolio/" role="menuitem">Portfolio ↗</a>
+      </div>
+    </div>
+
+    <div class="ds-header-controls">
+      <button type="button" class="ds-icon-btn" id="ds-theme-toggle" aria-pressed="false" aria-label="Switch to dark mode">
+        <span data-theme-label>Dark</span>
+      </button>
+      <button type="button" class="ds-icon-btn" id="ds-lang-toggle" aria-label="التبديل إلى اللغة العربية">
+        عربي
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Top Scroll Progress Bar -->
+  <div class="ds-top-progress" aria-hidden="true">
+    <div class="ds-top-progress-fill"></div>
+  </div>
+
+  <!-- Desktop Vertical Pipeline Rail (No Decorative Numbers) -->
+  <nav class="ds-rail" aria-label="Case study sections">
+    <div class="ds-rail-track" aria-hidden="true">
+      <div class="ds-rail-fill"></div>
+    </div>
+    <a href="#sec-hero" class="ds-rail-node is-active" data-target="sec-hero" aria-label="Overview"></a>
+    <a href="#sec-question" class="ds-rail-node" data-target="sec-question" aria-label="Business question"></a>
+    <a href="#sec-pipeline" class="ds-rail-node" data-target="sec-pipeline" aria-label="Analysis pipeline"></a>
+    <a href="#sec-findings" class="ds-rail-node" data-target="sec-findings" aria-label="Findings"></a>
+    <a href="#sec-dashboards" class="ds-rail-node" data-target="sec-dashboards" aria-label="Dashboards"></a>
+    <a href="#sec-sql" class="ds-rail-node" data-target="sec-sql" aria-label="SQL and DAX"></a>
+    <a href="#sec-quality" class="ds-rail-node" data-target="sec-quality" aria-label="Data notes"></a>
+    <a href="#sec-reproduce" class="ds-rail-node" data-target="sec-reproduce" aria-label="How to reproduce"></a>
+  </nav>
+
+  <main id="main-content">
+    <!-- ======================================================================
+         1. HERO & SINGLE-METRIC KPI CARDS
+         ====================================================================== -->
+    <section class="ds-section" id="sec-hero" aria-labelledby="project-title">
+      <div class="ds-container">
+        <div class="ds-chips-row" style="margin-block-end: var(--space-3);">
+          <span class="ds-chip ds-chip-accent" data-i18n="domainChip">HR</span>
+          <span class="ds-chip" data-i18n="practiceChip">Practice project · public Kaggle dataset (fictional company)</span>
+        </div>
+
+        <h1 id="project-title" style="font-size: var(--text-hero); line-height: 1.15; margin-block-end: var(--space-3);" data-i18n="projectTitle">
+          IBM HR Analytics: Employee Attrition &amp; Performance
+        </h1>
+
+        <p style="font-size: 1.1rem; color: var(--ink-muted); margin-block-end: var(--space-4);" data-i18n="heroQuestion">
+          Which workforce factors—such as overtime, job role, monthly income, and satisfaction—are most closely associated with employee attrition across 1,470 employees?
+        </p>
+
+        <!-- Tool Chips -->
+        <div class="ds-chips-row" style="margin-block-end: var(--space-5);">
+          <span class="ds-chip">SQL</span>
+          <span class="ds-chip" data-i18n="toolExcel">Excel (Pivot &amp; Slicers)</span>
+          <span class="ds-chip">Power BI (DAX)</span>
+        </div>
+
+        <!-- 3 KPI Cards (1 Metric per Card) -->
+        <div class="ds-kpi-grid">
+          <div class="ds-kpi-card">
+            <span class="ds-kpi-val">1,470</span>
+            <span class="ds-kpi-label" data-i18n="kpi1Label">Total employees</span>
+          </div>
+          <div class="ds-kpi-card">
+            <span class="ds-kpi-val">16.12%</span>
+            <span class="ds-kpi-label" data-i18n="kpi2Label">Attrition rate (237 left)</span>
+          </div>
+          <div class="ds-kpi-card">
+            <span class="ds-kpi-val">31% vs 10%</span>
+            <span class="ds-kpi-label" data-i18n="kpi3Label">Attrition with vs without overtime</span>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="ds-chips-row">
+          <a href="https://github.com/Esam-Haraz/IBM-HR-Analytics-Employee-Attrition-Performance" target="_blank" rel="noopener noreferrer" class="ds-btn ds-btn-primary" data-i18n="btnRepo">
+            GitHub Repository ↗
+          </a>
+          <a href="https://github.com/Esam-Haraz/IBM-HR-Analytics-Employee-Attrition-Performance/blob/main/README.md" target="_blank" rel="noopener noreferrer" class="ds-btn ds-btn-secondary" data-i18n="btnReadmeEn">
+            README (English) ↗
+          </a>
+          <a href="https://github.com/Esam-Haraz/IBM-HR-Analytics-Employee-Attrition-Performance/blob/main/README.ar.md" target="_blank" rel="noopener noreferrer" class="ds-btn ds-btn-secondary" data-i18n="btnReadmeAr">
+            README (العربية) ↗
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         2. BUSINESS QUESTION
+         ====================================================================== -->
+    <section class="ds-section" id="sec-question" aria-labelledby="q-title">
+      <div class="ds-container">
+        <div class="ds-section-header">
+          <h2 class="ds-section-title" id="q-title" data-i18n="qTitle">Business question &amp; goals</h2>
+        </div>
+
+        <div class="ds-node">
+          <div class="ds-node-body" style="display: flex; flex-direction: column; gap: var(--space-3);">
+            <p data-i18n="qPara1">
+              Using the public Kaggle IBM HR Analytics dataset representing a fictional company (1,470 employee records, 237 departures, 16.12% overall attrition, and an average monthly income of 6,502.93), this project identifies the strongest patterns behind employee turnover.
+            </p>
+            <p data-i18n="qPara2">
+              The analysis segments retention and attrition across overtime workload, department and job role, monthly income differences, job satisfaction, work-life balance, and tenure at the company.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         3. ANALYSIS PIPELINE (4 STEPS WITH NUMBERING)
+         ====================================================================== -->
+    <section class="ds-section" id="sec-pipeline" aria-labelledby="pipe-title">
+      <div class="ds-container">
+        <div class="ds-section-header">
+          <h2 class="ds-section-title" id="pipe-title" data-i18n="pipeTitle">Analysis pipeline</h2>
+          <p class="ds-section-desc" data-i18n="pipeDesc">
+            Workflow from raw CSV inspection through SQL querying, Excel Pivot validation, and Power BI DAX modeling.
+          </p>
+        </div>
+
+        <svg class="ds-connector" data-scroll-fill viewBox="0 0 800 24" preserveAspectRatio="none" style="inline-size: 100%; block-size: 24px; margin-block-end: var(--space-3);" aria-hidden="true">
+          <line class="ds-connector-base" x1="0" y1="12" x2="800" y2="12"></line>
+          <line class="ds-connector-fill" x1="0" y1="12" x2="800" y2="12"></line>
+        </svg>
+
+        <div class="ds-pipeline-row">
+          <div class="ds-pipeline-step">
+            <span class="ds-step-badge">Step 01</span>
+            <h3 style="font-size: var(--text-h3);" data-i18n="pStep1Title">Raw CSV</h3>
+            <p style="font-size: var(--text-sm); color: var(--ink-muted);" data-i18n="pStep1Body">
+              Inspected 1,470 employee records covering demographics, department, job role, monthly income, overtime status, satisfaction, and tenure.
+            </p>
+          </div>
+
+          <div class="ds-pipeline-step">
+            <span class="ds-step-badge">Step 02</span>
+            <h3 style="font-size: var(--text-h3);" data-i18n="pStep2Title">Excel cleaning</h3>
+            <p style="font-size: var(--text-sm); color: var(--ink-muted);" data-i18n="pStep2Body">
+              Prepared structured Pivot Tables and interactive slicers in Excel to cross-check segment headcounts and attrition breakdowns.
+            </p>
+          </div>
+
+          <div class="ds-pipeline-step">
+            <span class="ds-step-badge">Step 03</span>
+            <h3 style="font-size: var(--text-h3);" data-i18n="pStep3Title">SQL queries</h3>
+            <p style="font-size: var(--text-sm); color: var(--ink-muted);" data-i18n="pStep3Body">
+              Executed 10 analytical SQL queries measuring overtime impact, role attrition, income gaps, satisfaction levels, and tenure cohorts.
+            </p>
+          </div>
+
+          <div class="ds-pipeline-step">
+            <span class="ds-step-badge">Step 04</span>
+            <h3 style="font-size: var(--text-h3);" data-i18n="pStep4Title">Power BI dashboard</h3>
+            <p style="font-size: var(--text-sm); color: var(--ink-muted);" data-i18n="pStep4Body">
+              Built core DAX measures (Total Retained, Total Attrition, Retention Rate, Attrition Rate) using a green retention and red attrition theme.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         4. FINDINGS (ZERO-BASELINE HORIZONTAL BARS & SINGLE-NUMBER CALLOUTS)
+         ====================================================================== -->
+    <section class="ds-section" id="sec-findings" aria-labelledby="find-title">
+      <div class="ds-container">
+        <div class="ds-section-header">
+          <h2 class="ds-section-title" id="find-title" data-i18n="findTitle">Key findings</h2>
+          <p class="ds-section-desc" data-i18n="findDesc">
+            Dataset baselines: 1,470 employees, 16.12% overall attrition rate (237 employees left), and 6,502.93 average monthly income.
+          </p>
+        </div>
+
+        <div class="ds-findings-list">
+
+          <!-- Finding 1: Overtime vs Attrition (2 Comparable Percentages -> Zero-Baseline Bars) -->
+          <article class="ds-finding-card">
+            <div>
+              <h3 class="ds-finding-title" data-i18n="f1Title">
+                Employees working overtime experience roughly triple the attrition rate (31%) compared to those without overtime (10%).
+              </h3>
+              <p class="ds-finding-note" data-i18n="f1Note">
+                Overtime status produces the sharpest binary split in employee turnover across the dataset.
+              </p>
+            </div>
+
+            <div class="ds-bar-chart" role="img" aria-label="Attrition rate by overtime status: With overtime 31%, Without overtime 10%">
+              <div class="ds-bar-row">
+                <div class="ds-bar-meta">
+                  <span class="ds-bar-label" data-i18n="otYes">With overtime</span>
+                  <span class="ds-bar-val">31%</span>
+                </div>
+                <div class="ds-bar-track">
+                  <div class="ds-bar-fill" style="--bar-pct: 31;"></div>
+                </div>
+              </div>
+
+              <div class="ds-bar-row">
+                <div class="ds-bar-meta">
+                  <span class="ds-bar-label" data-i18n="otNo">Without overtime</span>
+                  <span class="ds-bar-val">10%</span>
+                </div>
+                <div class="ds-bar-track">
+                  <div class="ds-bar-fill" style="--bar-pct: 10;"></div>
+                </div>
+              </div>
+            </div>
+
+            <table class="ds-sr-only">
+              <caption>Attrition rate by overtime status</caption>
+              <thead>
+                <tr><th scope="col">Overtime status</th><th scope="col">Attrition rate</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>With overtime</td><td>31%</td></tr>
+                <tr><td>Without overtime</td><td>10%</td></tr>
+              </tbody>
+            </table>
+          </article>
+
+          <!-- Finding 2: Monthly Income Gap (2 Comparable Numbers -> Zero-Baseline Bars) -->
+          <article class="ds-finding-card">
+            <div>
+              <h3 class="ds-finding-title" data-i18n="f2Title">
+                Employees who left earned a substantially lower average monthly income (4,787.09) than employees who stayed (6,832.74).
+              </h3>
+              <p class="ds-finding-note" data-i18n="f2Note">
+                Compared against the overall company average monthly income of 6,502.93 across 1,470 employees.
+              </p>
+            </div>
+
+            <div class="ds-bar-chart" role="img" aria-label="Average monthly income by attrition status: Employees who left 4,787.09, Employees who stayed 6,832.74">
+              <div class="ds-bar-row">
+                <div class="ds-bar-meta">
+                  <span class="ds-bar-label" data-i18n="incLeft">Employees who left (Attrition)</span>
+                  <span class="ds-bar-val">4,787.09</span>
+                </div>
+                <div class="ds-bar-track">
+                  <div class="ds-bar-fill" style="--bar-pct: 59.84;"></div>
+                </div>
+              </div>
+
+              <div class="ds-bar-row">
+                <div class="ds-bar-meta">
+                  <span class="ds-bar-label" data-i18n="incStayed">Employees who stayed (Retained)</span>
+                  <span class="ds-bar-val">6,832.74</span>
+                </div>
+                <div class="ds-bar-track">
+                  <div class="ds-bar-fill" style="--bar-pct: 85.41;"></div>
+                </div>
+              </div>
+            </div>
+
+            <table class="ds-sr-only">
+              <caption>Average monthly income by attrition status</caption>
+              <thead>
+                <tr><th scope="col">Group</th><th scope="col">Average monthly income</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Employees who left</td><td>4,787.09</td></tr>
+                <tr><td>Employees who stayed</td><td>6,832.74</td></tr>
+              </tbody>
+            </table>
+          </article>
+
+          <!-- Finding 3: Sales Representative 39.76% & R&D Headcount 961 (Standout Callouts, NO Bars) -->
+          <article class="ds-finding-card">
+            <div>
+              <h3 class="ds-finding-title" data-i18n="f3Title">
+                Sales Representative records the highest attrition rate at 39.76% (nearly double the next highest role), while R&amp;D is the largest department (961 employees) without having the highest attrition.
+              </h3>
+            </div>
+
+            <div class="ds-callout">
+              <span class="ds-callout-num">39.76%</span>
+              <p class="ds-callout-text" data-i18n="f3Callout1">
+                Attrition rate for Sales Representatives—nearly double the second-highest job role in the organization.
+              </p>
+            </div>
+
+            <div class="ds-callout">
+              <span class="ds-callout-num">961</span>
+              <p class="ds-callout-text" data-i18n="f3Callout2">
+                Employees in Research &amp; Development, making it the largest department by headcount while maintaining lower attrition than Sales.
+              </p>
+            </div>
+          </article>
+
+          <!-- Finding 4: Job Satisfaction & Work-Life Balance Patterns -->
+          <article class="ds-finding-card">
+            <div>
+              <h3 class="ds-finding-title" data-i18n="f4Title">
+                Job satisfaction shows a clear inverse relationship with attrition, whereas work-life balance exhibits a non-linear pattern with the lowest attrition at a moderate level.
+              </h3>
+              <p class="ds-finding-note" data-i18n="f4Note">
+                Higher job satisfaction consistently aligns with lower turnover, while both extremes of work-life balance show higher attrition than the middle tier.
+              </p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         5. DASHBOARD SCREENSHOTS WITH KEYBOARD LIGHTBOX
+         ====================================================================== -->
+    <section class="ds-section" id="sec-dashboards" aria-labelledby="dash-title">
+      <div class="ds-container">
+        <div class="ds-section-header">
+          <h2 class="ds-section-title" id="dash-title" data-i18n="dashTitle">Interactive dashboards</h2>
+          <p class="ds-section-desc" data-i18n="dashDesc">
+            Click either dashboard to open the full-resolution view. Power BI uses a green theme for retention and red for attrition. Press Esc to close.
+          </p>
+        </div>
+
+        <div class="ds-dash-grid ds-dash-grid--2">
+          <figure class="ds-dash-frame">
+            <button type="button" class="ds-dash-trigger" aria-label="Zoom Excel Dashboard">
+              <img src="./Excel_Dashboard.webp"
+                   data-asset-name="Excel_Dashboard.webp"
+                   data-i18n-alt="dash1Alt"
+                   alt="Excel dashboard with Pivot Tables and interactive slicers for HR attrition analysis"
+                   width="1280"
+                   height="720"
+                   loading="lazy">
+            </button>
+            <figcaption class="ds-dash-caption">
+              <span data-i18n="dash1Cap">Excel Dashboard — Pivot Tables &amp; Slicers</span>
+              <span class="ds-chip">Excel_Dashboard.webp</span>
+            </figcaption>
+          </figure>
+
+          <figure class="ds-dash-frame">
+            <button type="button" class="ds-dash-trigger" aria-label="Zoom Power BI Dashboard">
+              <img src="./PowerBi_Dashboard.webp"
+                   data-asset-name="PowerBi_Dashboard.webp"
+                   data-i18n-alt="dash2Alt"
+                   alt="Power BI dashboard displaying employee retention in green and attrition in red with DAX KPI cards"
+                   width="1280"
+                   height="720"
+                   loading="lazy">
+            </button>
+            <figcaption class="ds-dash-caption">
+              <span data-i18n="dash2Cap">Power BI Dashboard — Retention (Green) &amp; Attrition (Red)</span>
+              <span class="ds-chip">PowerBi_Dashboard.webp</span>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         6. SQL QUERIES (.sql FILENAMES) & DAX MEASURES (NO FILENAMES)
+         ====================================================================== -->
+    <section class="ds-section" id="sec-sql" aria-labelledby="sql-title">
+      <div class="ds-container">
+        <div class="ds-section-header">
+          <h2 class="ds-section-title" id="sql-title" data-i18n="sqlTitle">SQL queries &amp; DAX measures</h2>
+          <p class="ds-section-desc" data-i18n="sqlDesc">
+            Expand any item below to inspect the SQL query screenshot or Power BI DAX formula from the repository.
+          </p>
+        </div>
+
+        <!-- Power BI DAX Measures (No filenames in summary) -->
+        <h3 style="font-size: var(--text-h3); margin-block-end: var(--space-3);" data-i18n="daxSubheading">Power BI DAX measures</h3>
+        <div class="ds-accordion-list" style="margin-block-end: var(--space-6);">
+          <details class="ds-details">
+            <summary class="ds-summary">
+              <span>DAX measure: Total Retained</span>
+              <span class="ds-summary-indicator" aria-hidden="true">+</span>
+            </summary>
+            <div class="ds-details-body">
+              <img src="./Dax_Total_Retained.webp" data-asset-name="Dax_Total_Retained.webp" alt="Power BI DAX formula screenshot for Total Retained measure" width="1200" height="420" loading="lazy">
+            </div>
+          </details>
+
+          <details class="ds-details">
+            <summary class="ds-summary">
+              <span>DAX measure: Total Attrition</span>
+              <span class="ds-summary-indicator" aria-hidden="true">+</span>
+            </summary>
+            <div class="ds-details-body">
+              <img src="./Dax_Total_Attrition.webp" data-asset-name="Dax_Total_Attrition.webp" alt="Power BI DAX formula screenshot for Total Attrition measure" width="1200" height="420" loading="lazy">
+            </div>
+          </details>
+
+          <details class="ds-details">
+            <summary class="ds-summary">
+              <span>DAX measure: Retention Rate</span>
+              <span class="ds-summary-indicator" aria-hidden="true">+</span>
+            </summary>
+            <div class="ds-details-body">
+              <img src="./Dax_Retention_Rate.webp" data-asset-name="Dax_Retention_Rate.webp" alt="Power BI DAX formula screenshot for Retention Rate measure" width="1200" height="420" loading="lazy">
+            </div>
+          </details>
+
+          <details class="ds-details">
+            <summary class="ds-summary">
+              <span>DAX measure: Attrition Rate</span>
+              <span class="ds-summary-indicator" aria-hidden="true">+</span>
+            </summary>
+            <div class="ds-details-body">
+              <img src="./Dax_Attrition_Rate.webp" data-asset-name="Dax_Attrition_Rate.webp" alt="Power BI DAX formula screenshot for Attrition Rate measure" width="1200" height="420" loading="lazy">
+            </div>
+          </details>
+        </div>
+
+        <!-- SQL Queries (Exact .sql filenames including Employees_Distirbution.sql) -->
+        <h3 style="font-size: var(--text-h3); margin-block-end: var(--space-3);" data-i18n="sqlSubheading">SQL query scripts</h3>
+        <div class="ds-accordion-list">
+          <details class="ds-details">
+            <summary class="ds-summary">
+              <span>Create_Table.sql</span>
+              <span class="ds-summary-indicator" aria-hidden="true">+</span>
+            </summary>
+            <div class="ds-details-body">
+              <img src="./Create_Table.webp" data-asset-name="Create_Table.webp" alt="SQL query screenshot for Create_Table.sql" width="1200" height="675" loading="lazy">
+            </div>
+          </details>
+
+          <details class="ds-details">
+            <summary class="ds-summary">
+              <span>Total_Employees_Attrition_Income.sql</span>
+              <span class="ds-summary-indicator" aria-hidden="true">+</span>
+            </summary>
+            <div class="ds-details-body">
+              <img src="./Total_Employees_Attrition_Income.webp" data-asset-name="Total_Employees_Attrition_Income.webp" alt="SQL query screenshot for Total_Employees_Attrition_Income.sql" width="1200" height="675" loading="lazy">
+            </div>
+          </details>
+
+          <details class="ds-details">
+            <summary class="ds-summary">
+              <span>Employees_Distirbution.sql</span>
+              <span class="ds-summary-indicator" aria-hidden="true">+</span>
+            </summary>
+            <div class="ds-details-body">
+              <img src="./Employees_Distirbution.webp" data-asset-name="Employees_Distirbution.webp" alt="SQL query screenshot for Employees_Distirbution.sql" width="1200" height="675" loading="lazy">
+            </div>
+          </details>
+
+          <details class="ds-details">
+            <summary class="ds-summary">
+              <span>Overtime_Employees_Percentage.sql</span>
+              <span class="ds-summary-indicator" aria-hidden="true">+</span>
+            </summary>
+            <div class="ds-details-body">
+              <img src="./Overtime_Employees_Percentage.webp" data-asset-name="Overtime_Employees_Percentage.webp" alt="SQL query screenshot for Overtime_Employees_Percentage.sql" width="1200" height="675" loading="lazy">
+            </div>
+          </details>
+
+          <details class="ds-details">
+            <summary class="ds-summary">
+              <span>Avg_Distance_Age.sql</span>
+              <span class="ds-summary-indicator" aria-hidden="true">+</span>
+            </summary>
+            <div class="ds-details-body">
+              <img src="./Avg_Distance_Age.webp" data-asset-name="Avg_Distance_Age.webp" alt="SQL query screenshot for Avg_Distance_Age.sql" width="1200" height="675" loading="lazy">
+            </div>
+          </details>
+
+          <details class="ds-details">
+            <summary class="ds-summary">
+              <span>Overtime_VS_Attrition_Relationship.sql</span>
+              <span class="ds-summary-indicator" aria-hidden="true">+</span>
+            </summary>
+            <div class="ds-details-body">
+              <img src="./Overtime_VS_Attrition_Relationship.webp" data-asset-name="Overtime_VS_Attrition_Relationship.webp" alt="SQL query screenshot for Overtime_VS_Attrition_Relationship.sql" width="1200" height="675" loading="lazy">
+            </div>
+          </details>
+
+          <details class="ds-details">
+            <summary class="ds-summary">
+              <span>Attrition_By_Department_JobRole.sql</span>
+              <span class="ds-summary-indicator" aria-hidden="true">+</span>
+            </summary>
+            <div class="ds-details-body">
+              <img src="./Attrition_By_Department_JobRole.webp" data-asset-name="Attrition_By_Department_JobRole.webp" alt="SQL query screenshot for Attrition_By_Department_JobRole.sql" width="1200" height="675" loading="lazy">
+            </div>
+          </details>
+
+          <details class="ds-details">
+            <summary class="ds-summary">
+              <span>Attrition_By_Years_At_Company.sql</span>
+              <span class="ds-summary-indicator" aria-hidden="true">+</span>
+            </summary>
+            <div class="ds-details-body">
+              <img src="./Attrition_By_Years_At_Company.webp" data-asset-name="Attrition_By_Years_At_Company.webp" alt="SQL query screenshot for Attrition_By_Years_At_Company.sql" width="1200" height="675" loading="lazy">
+            </div>
+          </details>
+
+          <details class="ds-details">
+            <summary class="ds-summary">
+              <span>Income_Gap_By_Attrition.sql</span>
+              <span class="ds-summary-indicator" aria-hidden="true">+</span>
+            </summary>
+            <div class="ds-details-body">
+              <img src="./Income_Gap_By_Attrition.webp" data-asset-name="Income_Gap_By_Attrition.webp" alt="SQL query screenshot for Income_Gap_By_Attrition.sql" width="1200" height="675" loading="lazy">
+            </div>
+          </details>
+
+          <details class="ds-details">
+            <summary class="ds-summary">
+              <span>JobSatisfaction_VS_Attrition.sql</span>
+              <span class="ds-summary-indicator" aria-hidden="true">+</span>
+            </summary>
+            <div class="ds-details-body">
+              <img src="./JobSatisfaction_VS_Attrition.webp" data-asset-name="JobSatisfaction_VS_Attrition.webp" alt="SQL query screenshot for JobSatisfaction_VS_Attrition.sql" width="1200" height="675" loading="lazy">
+            </div>
+          </details>
+
+          <details class="ds-details">
+            <summary class="ds-summary">
+              <span>WorkLifeBalance_VS_Attrition.sql</span>
+              <span class="ds-summary-indicator" aria-hidden="true">+</span>
+            </summary>
+            <div class="ds-details-body">
+              <img src="./WorkLifeBalance_VS_Attrition.webp" data-asset-name="WorkLifeBalance_VS_Attrition.webp" alt="SQL query screenshot for WorkLifeBalance_VS_Attrition.sql" width="1200" height="675" loading="lazy">
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         7. DATA CONTEXT & SAMPLE SIZE NOTES
+         ====================================================================== -->
+    <section class="ds-section" id="sec-quality" aria-labelledby="qual-title">
+      <div class="ds-container">
+        <div class="ds-section-header">
+          <h2 class="ds-section-title" id="qual-title" data-i18n="qualTitle">Dataset context &amp; analytical notes</h2>
+        </div>
+
+        <div class="ds-notice-warn">
+          <strong data-i18n="qualLead">Methodological notes for interpreting these HR metrics:</strong>
+          <ul>
+            <li data-i18n="qualItem1">
+              The dataset comes from a public Kaggle HR practice dataset representing a fictional organization (1,470 employee rows).
+            </li>
+            <li data-i18n="qualItem2">
+              In the company tenure analysis, employee headcount is reported alongside attrition rates for each tenure group so small sample sizes are clearly distinguished from larger cohorts.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         8. HOW TO REPRODUCE (FOLDER NAMES & GENERAL STEPS ONLY)
+         ====================================================================== -->
+    <section class="ds-section" id="sec-reproduce" aria-labelledby="repro-title">
+      <div class="ds-container">
+        <div class="ds-section-header">
+          <h2 class="ds-section-title" id="repro-title" data-i18n="reproTitle">How to reproduce</h2>
+        </div>
+
+        <ol class="ds-steps-list">
+          <li data-i18n="repro1">Clone or download the GitHub repository containing the dataset and analysis folders.</li>
+          <li data-i18n="repro2">Run the table creation and analytical scripts inside the <code>SQL/</code> folder to reproduce the attrition, overtime, income, role, satisfaction, and tenure breakdowns.</li>
+          <li data-i18n="repro3">Open the <code>Excel/</code> folder to explore the Pivot Tables, slicers, and spreadsheet dashboard.</li>
+          <li data-i18n="repro4">Open the <code>Power Bi/</code> folder to inspect the DAX measures and interactive retention vs. attrition report.</li>
+        </ol>
+
+        <!-- 9. Project Navigation & Contact -->
+        <nav class="ds-project-nav" aria-label="Project navigation">
+          <div class="ds-chips-row">
+            <a href="../../../" class="ds-btn ds-btn-secondary" data-i18n="navBack">← Network home</a>
+            <a href="../supply-chain/" class="ds-btn ds-btn-secondary" data-i18n="navPrev">← Supply Chain</a>
+          </div>
+          <div class="ds-chips-row">
+            <a href="mailto:esamv20@gmail.com" class="ds-btn ds-btn-secondary" data-contact-cta data-i18n="navContact">Contact</a>
+            <a href="../pizza-sales/" class="ds-btn ds-btn-primary" data-i18n="navNext">Next: Pizza Sales Analysis →</a>
+          </div>
+        </nav>
+      </div>
+    </section>
+  </main>
+
+  <!-- Accessible Modal Lightbox -->
+  <div class="ds-lightbox" id="ds-lightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="ds-lightbox-title">
+    <div class="ds-lightbox-dialog">
+      <div class="ds-lightbox-bar">
+        <span class="ds-lightbox-title" id="ds-lightbox-title">Dashboard preview</span>
+        <button type="button" class="ds-btn ds-btn-secondary" id="ds-lightbox-close" data-i18n="closeBtn">Close (Esc)</button>
+      </div>
+      <div class="ds-lightbox-body">
+        <img id="ds-lightbox-img" src="" alt="">
+      </div>
+    </div>
+  </div>
+
+  <!-- Site Footer -->
+  <footer class="ds-footer">
+    <div class="ds-container">
+      <div class="ds-footer-grid">
+        <div>
+          <strong style="font-family: var(--font-display); font-size: 1.05rem;" data-i18n="brandName">Esam Haraz</strong>
+          <p style="font-size: var(--text-sm); color: var(--ink-muted); margin-block-start: var(--space-1);" data-i18n="footerTagline">
+            Data Analysis Portfolio · SQL, Excel &amp; Power BI
+          </p>
+        </div>
+        <div class="ds-footer-links">
+          <a href="../../../" class="ds-btn ds-btn-secondary" data-i18n="navHome">Network Home</a>
+          <a href="https://www.linkedin.com/in/esam-haraz-459925402" target="_blank" rel="noopener noreferrer" class="ds-btn ds-btn-secondary">LinkedIn ↗</a>
+          <a href="mailto:esamv20@gmail.com" class="ds-btn ds-btn-secondary" data-contact-cta>esamv20@gmail.com</a>
+        </div>
+      </div>
+
+      <div class="ds-footer-bottom">
+        <span data-i18n="copyright">© 2026 Esam Haraz.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       BILINGUAL DICTIONARY (EN & AR) — CONSOLIDATED FOR EASY REVIEW
+       ========================================================================== -->
+  <script>
+    window.PAGE_I18N = {
+      en: {
+        skipToMain: "Skip to main content",
+        brandName: "Esam Haraz",
+        domainChip: "HR",
+        practiceChip: "Practice project · public Kaggle dataset (fictional company)",
+        projectTitle: "IBM HR Analytics: Employee Attrition & Performance",
+        heroQuestion: "Which workforce factors—such as overtime, job role, monthly income, and satisfaction—are most closely associated with employee attrition across 1,470 employees?",
+        toolExcel: "Excel (Pivot & Slicers)",
+        kpi1Label: "Total employees",
+        kpi2Label: "Attrition rate (237 left)",
+        kpi3Label: "Attrition with vs without overtime",
+        btnRepo: "GitHub Repository ↗",
+        btnReadmeEn: "README (English) ↗",
+        btnReadmeAr: "README (العربية) ↗",
+        qTitle: "Business question & goals",
+        qPara1: "Using the public Kaggle IBM HR Analytics dataset representing a fictional company (1,470 employee records, 237 departures, 16.12% overall attrition, and an average monthly income of 6,502.93), this project identifies the strongest patterns behind employee turnover.",
+        qPara2: "The analysis segments retention and attrition across overtime workload, department and job role, monthly income differences, job satisfaction, work-life balance, and tenure at the company.",
+        pipeTitle: "Analysis pipeline",
+        pipeDesc: "Workflow from raw CSV inspection through SQL querying, Excel Pivot validation, and Power BI DAX modeling.",
+        pStep1Title: "Raw CSV",
+        pStep1Body: "Inspected 1,470 employee records covering demographics, department, job role, monthly income, overtime status, satisfaction, and tenure.",
+        pStep2Title: "Excel cleaning",
+        pStep2Body: "Prepared structured Pivot Tables and interactive slicers in Excel to cross-check segment headcounts and attrition breakdowns.",
+        pStep3Title: "SQL queries",
+        pStep3Body: "Executed 10 analytical SQL queries measuring overtime impact, role attrition, income gaps, satisfaction levels, and tenure cohorts.",
+        pStep4Title: "Power BI dashboard",
+        pStep4Body: "Built core DAX measures (Total Retained, Total Attrition, Retention Rate, Attrition Rate) using a green retention and red attrition theme.",
+        findTitle: "Key findings",
+        findDesc: "Dataset baselines: 1,470 employees, 16.12% overall attrition rate (237 employees left), and 6,502.93 average monthly income.",
+        f1Title: "Employees working overtime experience roughly triple the attrition rate (31%) compared to those without overtime (10%).",
+        f1Note: "Overtime status produces the sharpest binary split in employee turnover across the dataset.",
+        otYes: "With overtime",
+        otNo: "Without overtime",
+        f2Title: "Employees who left earned a substantially lower average monthly income (4,787.09) than employees who stayed (6,832.74).",
+        f2Note: "Compared against the overall company average monthly income of 6,502.93 across 1,470 employees.",
+        incLeft: "Employees who left (Attrition)",
+        incStayed: "Employees who stayed (Retained)",
+        f3Title: "Sales Representative records the highest attrition rate at 39.76% (nearly double the next highest role), while R&D is the largest department (961 employees) without having the highest attrition.",
+        f3Callout1: "Attrition rate for Sales Representatives—nearly double the second-highest job role in the organization.",
+        f3Callout2: "Employees in Research & Development, making it the largest department by headcount while maintaining lower attrition than Sales.",
+        f4Title: "Job satisfaction shows a clear inverse relationship with attrition, whereas work-life balance exhibits a non-linear pattern with the lowest attrition at a moderate level.",
+        f4Note: "Higher job satisfaction consistently aligns with lower turnover, while both extremes of work-life balance show higher attrition than the middle tier.",
+        dashTitle: "Interactive dashboards",
+        dashDesc: "Click either dashboard to open the full-resolution view. Power BI uses a green theme for retention and red for attrition. Press Esc to close.",
+        dash1Alt: "Excel dashboard with Pivot Tables and interactive slicers for HR attrition analysis",
+        dash1Cap: "Excel Dashboard — Pivot Tables & Slicers",
+        dash2Alt: "Power BI dashboard displaying employee retention in green and attrition in red with DAX KPI cards",
+        dash2Cap: "Power BI Dashboard — Retention (Green) & Attrition (Red)",
+        sqlTitle: "SQL queries & DAX measures",
+        sqlDesc: "Expand any item below to inspect the SQL query screenshot or Power BI DAX formula from the repository.",
+        daxSubheading: "Power BI DAX measures",
+        sqlSubheading: "SQL query scripts",
+        qualTitle: "Dataset context & analytical notes",
+        qualLead: "Methodological notes for interpreting these HR metrics:",
+        qualItem1: "The dataset comes from a public Kaggle HR practice dataset representing a fictional organization (1,470 employee rows).",
+        qualItem2: "In the company tenure analysis, employee headcount is reported alongside attrition rates for each tenure group so small sample sizes are clearly distinguished from larger cohorts.",
+        reproTitle: "How to reproduce",
+        repro1: "Clone or download the GitHub repository containing the dataset and analysis folders.",
+        repro2: "Run the table creation and analytical scripts inside the SQL/ folder to reproduce the attrition, overtime, income, role, satisfaction, and tenure breakdowns.",
+        repro3: "Open the Excel/ folder to explore the Pivot Tables, slicers, and spreadsheet dashboard.",
+        repro4: "Open the Power Bi/ folder to inspect the DAX measures and interactive retention vs. attrition report.",
+        navBack: "← Network home",
+        navPrev: "← Supply Chain",
+        navContact: "Contact",
+        navNext: "Next: Pizza Sales Analysis →",
+        closeBtn: "Close (Esc)",
+        footerTagline: "Data Analysis Portfolio · SQL, Excel & Power BI",
+        navHome: "Network Home",
+        copyright: "© 2026 Esam Haraz."
+      },
+      ar: {
+        skipToMain: "تخطي إلى المحتوى الرئيسي",
+        brandName: "عصام حراز",
+        domainChip: "الموارد البشرية",
+        practiceChip: "مشروع تدريبي · مجموعة بيانات عامة من Kaggle (شركة افتراضية)",
+        projectTitle: "تحليل بيانات الموارد البشرية: التسرب الوظيفي والأداء",
+        heroQuestion: "ما العوامل الوظيفية—مثل العمل الإضافي، والمسمى الوظيفي، والدخل الشهري، والرضا الوظيفي—الأكثر ارتباطاً بالتسرب الوظيفي عبر 1,470 موظفاً؟",
+        toolExcel: "Excel (Pivot وعوامل تصفية Slicers)",
+        kpi1Label: "إجمالي الموظفين",
+        kpi2Label: "معدل التسرب الوظيفي (غادر 237 موظفاً)",
+        kpi3Label: "التسرب الوظيفي مع العمل الإضافي مقابل بدونه",
+        btnRepo: "مستودع GitHub ↗",
+        btnReadmeEn: "ملف README (إنجليزي) ↗",
+        btnReadmeAr: "ملف README (عربي) ↗",
+        qTitle: "سؤال العمل والأهداف",
+        qPara1: "بالاعتماد على مجموعة بيانات IBM HR Analytics العامة على Kaggle التي تمثل شركة افتراضية (1,470 سجل موظف، و237 حالة مغادرة، ومعدل تسرب إجمالي 16.12%، ومتوسط دخل شهري 6,502.93)، يحدد هذا المشروع أبرز الأنماط المرتبطة بدوران الموظفين.",
+        qPara2: "يقسم التحليل معدلات البقاء والتسرب الوظيفي وفق عبء العمل الإضافي (Overtime)، والقسم والمسمى الوظيفي، وفجوة الدخل الشهري، ومستوى الرضا الوظيفي، والتوازن بين العمل والحياة، ومدة الخدمة في الشركة.",
+        pipeTitle: "مسار التحليل",
+        pipeDesc: "مراحل العمل من فحص ملف CSV الخام مروراً باستعلامات SQL وجداول Pivot في Excel وحتى نمذجة DAX في Power BI.",
+        pStep1Title: "البيانات الخام (CSV)",
+        pStep1Body: "فحص سجلات 1,470 موظفاً وتشمل البيانات الديموغرافية والقسم والمسمى الوظيفي والدخل الشهري وحالة العمل الإضافي والرضا ومدة الخدمة.",
+        pStep2Title: "التنظيف في Excel",
+        pStep2Body: "إعداد جداول Pivot منظمة وعوامل تصفية (Slicers) في Excel للتحقق من أعداد الموظفين ونسب التسرب عبر الشرائح.",
+        pStep3Title: "استعلامات SQL",
+        pStep3Body: "تنفيذ 10 استعلامات تحليلية تقيس أثر العمل الإضافي، والتسرب حسب الدور الوظيفي، وفجوة الدخل، ومستويات الرضا، وشرائح مدة الخدمة.",
+        pStep4Title: "لوحة معلومات Power BI",
+        pStep4Body: "بناء مقاييس DAX الأساسية (Total Retained و Total Attrition و Retention Rate و Attrition Rate) بتصميم يميز البقاء بالأخضر والتسرب بالأحمر.",
+        findTitle: "أبرز النتائج",
+        findDesc: "المؤشرات الأساسية للبيانات: 1,470 موظفاً، معدل التسرب الوظيفي الإجمالي 16.12% (غادر 237 موظفاً)، ومتوسط الدخل الشهري 6,502.93.",
+        f1Title: "يسجل الموظفون الذين يعملون ساعات إضافية (Overtime) معدل تسرب وظيفي يقارب ثلاثة أضعاف (31%) مقارنة بمن لا يعملون ساعات إضافية (10%).",
+        f1Note: "يمثل العمل الإضافي الفارق الثنائي الأبرز في معدلات التسرب الوظيفي عبر مجموعة البيانات.",
+        otYes: "مع عمل إضافي (Overtime)",
+        otNo: "بدون عمل إضافي",
+        f2Title: "حصل الموظفون المغادرون على متوسط دخل شهري أقل بشكل ملحوظ (4,787.09) مقارنة بالموظفين الباقين (6,832.74).",
+        f2Note: "مقارنة بمتوسط الدخل الشهري العام البالغ 6,502.93 عبر جميع الموظفين البالغ عددهم 1,470 موظفاً.",
+        incLeft: "الموظفون المغادرون (Attrition)",
+        incStayed: "الموظفون الباقون (Retained)",
+        f3Title: "يسجل دور ممثل المبيعات (Sales Representative) أعلى معدل تسرب وظيفي بنسبة 39.76% (ضعف أعلى دور يليه تقريباً)، بينما يضم قسم البحث والتطوير (R&D) أكبر عدد موظفين (961) دون أن يسجل أعلى تسرب.",
+        f3Callout1: "معدل التسرب الوظيفي لفئة Sales Representative، وهو ما يقارب ضعف ثاني أعلى مسمى وظيفي في الشركة.",
+        f3Callout2: "عدد الموظفين في قسم Research & Development بصفته القسم الأكبر حجماً مع بقاء معدل تسربه أقل من المبيعات.",
+        f4Title: "يُظهر الرضا الوظيفي علاقة عكسية واضحة مع التسرب، بينما يتخذ التوازن بين العمل والحياة علاقة غير خطية بأقل معدل تسرب عند المستوى المتوسط.",
+        f4Note: "ينخفض التسرب بانتظام مع ارتفاع الرضا الوظيفي، في حين ترتفع معدلات التسرب عند طرفي التوازن بين العمل والحياة مقارنة بالمستوى المتوسط.",
+        dashTitle: "لوحات المعلومات التفاعلية",
+        dashDesc: "اضغط على أي لوحة لعرضها بالحجم الكامل. تعتمد لوحة Power BI اللون الأخضر للبقاء والأحمر للتسرب الوظيفي. اضغط Esc للإغلاق.",
+        dash1Alt: "لوحة معلومات Excel مزودة بجداول Pivot وعوامل تصفية تفاعلية لتحليل التسرب الوظيفي",
+        dash1Cap: "لوحة معلومات Excel — جداول Pivot وعوامل التصفية",
+        dash2Alt: "لوحة معلومات Power BI تعرض بقاء الموظفين بالأخضر والتسرب الوظيفي بالأحمر مع بطاقات DAX",
+        dash2Cap: "لوحة معلومات Power BI — البقاء (أخضر) والتسرب الوظيفي (أحمر)",
+        sqlTitle: "استعلامات SQL ومعادلات DAX",
+        sqlDesc: "افتح أي عنصر أدناه لعرض لقطة استعلام SQL أو معادلة Power BI DAX من المستودع.",
+        daxSubheading: "معادلات Power BI DAX",
+        sqlSubheading: "ملفات استعلامات SQL",
+        qualTitle: "سياق البيانات وملاحظات التحليل",
+        qualLead: "ملاحظات منهجية لقراءة مؤشرات الموارد البشرية:",
+        qualItem1: "تستند البيانات إلى مجموعة بيانات تدريبية عامة على Kaggle تمثل شركة افتراضية (1,470 سجل موظف).",
+        qualItem2: "في تحليل مدة الخدمة بالشركة، يتم عرض عدد الموظفين في كل مجموعة جنباً إلى جنب مع معدل التسرب لتمييز العينات الصغيرة بوضوح.",
+        reproTitle: "خطوات إعادة التشغيل",
+        repro1: "قم باستنساخ أو تنزيل مستودع GitHub الذي يضم مجموعة البيانات ومجلدات التحليل.",
+        repro2: "شغّل ملفات إنشاء الجدول والاستعلامات التحليلية داخل مجلد SQL/ لإعادة استخراج نتائج التسرب والعمل الإضافي والدخل والأدوار والرضا ومدة الخدمة.",
+        repro3: "افتح مجلد Excel/ لاستعراض جداول Pivot وعوامل التصفية ولوحة المعلومات.",
+        repro4: "افتح مجلد Power Bi/ لفحص معادلات DAX والتقرير التفاعلي للبقاء والتسرب الوظيفي.",
+        navBack: "→ الرئيسية",
+        navPrev: "→ سلاسل الإمداد",
+        navContact: "تواصل معي",
+        navNext: "التالي: تحليل مبيعات البيتزا ←",
+        closeBtn: "إغلاق (Esc)",
+        footerTagline: "معرض أعمال تحليل البيانات · SQL و Excel و Power BI",
+        navHome: "الرئيسية",
+        copyright: "© 2026 عصام حراز."
+      }
+    };
+  </script>
+</body>
+</html>
