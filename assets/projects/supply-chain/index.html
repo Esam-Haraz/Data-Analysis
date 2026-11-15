@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-site="data">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Single Site Config Block -->
+  <script>
+    window.SITE_CONFIG = {
+      baseUrl: "https://esam-haraz.github.io/Data-Analysis/",
+      currentSiteId: "data",
+      sitesGraph: [
+        { id: "hub", labelEn: "Services Hub", labelAr: "المركز الرئيسي", url: "https://esam-haraz.github.io/hub/" },
+        { id: "autodeploy", labelEn: "AutoDeploy", labelAr: "AutoDeploy", url: "https://esam-haraz.github.io/AutoDeploy/" },
+        { id: "data", labelEn: "Data Analysis", labelAr: "تحليل البيانات", url: "../../../" },
+        { id: "portfolio", labelEn: "Portfolio", labelAr: "معرض الأعمال", url: "https://esam-haraz.github.io/portfolio/" }
+      ],
+      hubContactUrl: "mailto:esamv20@gmail.com",
+      email: "esamv20@gmail.com",
+      linkedinUrl: "https://www.linkedin.com/in/esam-haraz-459925402"
+    };
+  </script>
+
+  <!-- Primary SEO & Canonical Metadata -->
+  <title>Supply Chain &amp; Shipment Deliveries Analysis — Esam Haraz</title>
+  <meta name="description" content="Analysis of 25,000 shipment deliveries across weather conditions, delivery partners, shipping modes, and distance-to-cost scaling using Excel and PostgreSQL.">
+  <meta name="author" content="Esam Haraz">
+  <link rel="canonical" id="meta-canonical" href="https://esam-haraz.github.io/Data-Analysis/assets/projects/supply-chain/">
+
+  <!-- Open Graph & Social Sharing Metadata -->
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="ar_EG">
+  <meta property="og:title" content="Supply Chain &amp; Shipment Deliveries Analysis — Esam Haraz">
+  <meta property="og:description" content="Logistics case study analyzing 25,000 shipments with Excel dashboards and PostgreSQL queries.">
+  <meta property="og:url" id="meta-og-url" content="https://esam-haraz.github.io/Data-Analysis/assets/projects/supply-chain/">
+  <meta property="og:image" id="meta-og-image" content="https://esam-haraz.github.io/Data-Analysis/assets/projects/supply-chain/Excel_Dashboard.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Supply Chain &amp; Shipment Deliveries Analysis — Esam Haraz">
+  <meta name="twitter:description" content="Logistics case study analyzing 25,000 shipments with Excel dashboards and PostgreSQL queries.">
+  <meta name="twitter:image" id="meta-twitter-image" content="https://esam-haraz.github.io/Data-Analysis/assets/projects/supply-chain/Excel_Dashboard.webp">
+
+  <script>
+    (function () {
+      var base = (window.SITE_CONFIG && window.SITE_CONFIG.baseUrl) || "https://esam-haraz.github.io/Data-Analysis/";
+      if (!base.endsWith("/")) base += "/";
+      var pageUrl = base + "assets/projects/supply-chain/";
+      var imgUrl = base + "assets/projects/supply-chain/Excel_Dashboard.webp";
+      var canonical = document.getElementById("meta-canonical");
+      var ogUrl = document.getElementById("meta-og-url");
+      var ogImg = document.getElementById("meta-og-image");
+      var twImg = document.getElementById("meta-twitter-image");
+      if (canonical) canonical.setAttribute("href", pageUrl);
+      if (ogUrl) ogUrl.setAttribute("content", pageUrl);
+      if (ogImg) ogImg.setAttribute("content", imgUrl);
+      if (twImg) twImg.setAttribute("content", imgUrl);
+    })();
+  </script>
+
+  <!-- Inline Vector Favicon (Pipeline Amber #FFB020) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='4' y='4' width='56' height='56' rx='12' fill='%230D1F1A' stroke='%23FFB020' stroke-width='3'/%3E%3Crect x='16' y='34' width='8' height='16' rx='4' fill='%23FFB020'/%3E%3Crect x='28' y='24' width='8' height='26' rx='4' fill='%23FFB020'/%3E%3Crect x='40' y='15' width='8' height='35' rx='4' fill='%23FFB020'/%3E%3C/svg%3E">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800&family=DM+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Shared Design System v1.1 -->
+  <link rel="stylesheet" href="../../ds.css">
+  <script src="../../ds.js" defer></script>
+</head>
+<body class="has-rail">
+  <a href="#main-content" class="ds-skip-link" data-i18n="skipToMain">Skip to main content</a>
+
+  <!-- Circular Language Transition Curtain -->
+  <div class="ds-curtain" id="ds-curtain" aria-hidden="true">
+    <div class="ds-curtain-layer ds-curtain-outer" id="ds-curtain-outer"></div>
+    <div class="ds-curtain-layer ds-curtain-inner" id="ds-curtain-inner">
+      <span class="ds-curtain-sub" id="ds-curtain-sub">SWITCHING LANGUAGE</span>
+      <span class="ds-curtain-label" id="ds-curtain-label">DATA ANALYSIS</span>
+    </div>
+  </div>
+
+  <!-- Site Header -->
+  <header class="ds-header">
+    <a href="../../../" class="ds-brand">
+      <span class="ds-brand-mark" aria-hidden="true"></span>
+      <span data-i18n="brandName">Esam Haraz</span>
+    </a>
+
+    <nav class="ds-mini-graph" id="ds-mini-graph" aria-label="Sites network navigation">
+      <a href="https://esam-haraz.github.io/hub/" class="ds-mini-node">
+        <span class="ds-mini-dot" aria-hidden="true"></span>
+        <span>Services Hub</span>
+      </a>
+      <span class="ds-mini-edge" aria-hidden="true"></span>
+      <a href="https://esam-haraz.github.io/AutoDeploy/" class="ds-mini-node">
+        <span class="ds-mini-dot" aria-hidden="true"></span>
+        <span>AutoDeploy</span>
+      </a>
+      <span class="ds-mini-edge" aria-hidden="true"></span>
+      <a href="../../../" class="ds-mini-node is-current" aria-current="page">
+        <span class="ds-mini-dot" aria-hidden="true"></span>
+        <span>Data Analysis</span>
+      </a>
+      <span class="ds-mini-edge" aria-hidden="true"></span>
+      <a href="https://esam-haraz.github.io/portfolio/" class="ds-mini-node">
+        <span class="ds-mini-dot" aria-hidden="true"></span>
+        <span>Portfolio</span>
+      </a>
+    </nav>
+
+    <div class="ds-nav-dropdown" id="ds-nav-dropdown">
+      <button type="button"
+              class="ds-nav-dropdown-btn"
+              id="ds-nav-dropdown-btn"
+              aria-expanded="false"
+              aria-controls="ds-nav-dropdown-menu">
+        Data ▾
+      </button>
+      <div class="ds-nav-dropdown-menu" id="ds-nav-dropdown-menu" role="menu">
+        <a href="https://esam-haraz.github.io/hub/" role="menuitem">Services Hub ↗</a>
+        <a href="https://esam-haraz.github.io/AutoDeploy/" role="menuitem">AutoDeploy ↗</a>
+        <a href="../../../" class="is-current" aria-current="page" role="menuitem">Data Analysis ●</a>
+        <a href="https://esam-haraz.github.io/portfolio/" role="menuitem">Portfolio ↗</a>
+      </div>
+    </div>
+
+    <div class="ds-header-controls">
+      <button type="button" class="ds-icon-btn" id="ds-theme-toggle" aria-pressed="false" aria-label="Switch to dark mode">
+        <span data-theme-label>Dark</span>
+      </button>
+      <button type="button" class="ds-icon-btn" id="ds-lang-toggle" aria-label="التبديل إلى اللغة العربية">
+        عربي
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Top Scroll Progress Bar -->
+  <div class="ds-top-progress" aria-hidden="true">
+    <div class="ds-top-progress-fill"></div>
+  </div>
+
+  <!-- Desktop Vertical Pipeline Rail (No Decorative Numbers) -->
+  <nav class="ds-rail" aria-label="Case study sections">
+    <div class="ds-rail-track" aria-hidden="true">
+      <div class="ds-rail-fill"></div>
+    </div>
+    <a href="#sec-hero" class="ds-rail-node is-active" data-target="sec-hero" aria-label="Overview"></a>
+    <a href="#sec-question" class="ds-rail-node" data-target="sec-question" aria-label="Business question"></a>
+    <a href="#sec-pipeline" class="ds-rail-node" data-target="sec-pipeline" aria-label="Analysis pipeline"></a>
+    <a href="#sec-findings" class="ds-rail-node" data-target="sec-findings" aria-label="Findings"></a>
+    <a href="#sec-dashboards" class="ds-rail-node" data-target="sec-dashboards" aria-label="Dashboard"></a>
+    <a href="#sec-sql" class="ds-rail-node" data-target="sec-sql" aria-label="SQL queries"></a>
+    <a href="#sec-quality" class="ds-rail-node" data-target="sec-quality" aria-label="Data quality"></a>
+    <a href="#sec-reproduce" class="ds-rail-node" data-target="sec-reproduce" aria-label="How to reproduce"></a>
+  </nav>
+
+  <main id="main-content">
+    <!-- ======================================================================
+         1. HERO & SINGLE-METRIC KPI CARDS
+         ====================================================================== -->
+    <section class="ds-section" id="sec-hero" aria-labelledby="project-title">
+      <div class="ds-container">
+        <div class="ds-chips-row" style="margin-block-end: var(--space-3);">
+          <span class="ds-chip ds-chip-accent" data-i18n="domainChip">Logistics</span>
+          <span class="ds-chip" data-i18n="practiceChip">Practice project · public Kaggle dataset</span>
+        </div>
+
+        <h1 id="project-title" style="font-size: var(--text-hero); line-height: 1.15; margin-block-end: var(--space-3);" data-i18n="projectTitle">
+          Supply Chain &amp; Shipment Deliveries Analysis
+        </h1>
+
+        <p style="font-size: 1.1rem; color: var(--ink-muted); margin-block-end: var(--space-4);" data-i18n="heroQuestion">
+          Which operational factors drive shipment delays, delivery costs, and customer satisfaction across 25,000 deliveries?
+        </p>
+
+        <!-- Tool Chips -->
+        <div class="ds-chips-row" style="margin-block-end: var(--space-5);">
+          <span class="ds-chip">Excel</span>
+          <span class="ds-chip" data-i18n="toolExcelDetail">Pivot Tables &amp; Slicers</span>
+          <span class="ds-chip">PostgreSQL</span>
+        </div>
+
+        <!-- 3 KPI Cards (1 Metric per Card) -->
+        <div class="ds-kpi-grid">
+          <div class="ds-kpi-card">
+            <span class="ds-kpi-val">25,000</span>
+            <span class="ds-kpi-label" data-i18n="kpi1Label">Total shipments</span>
+          </div>
+          <div class="ds-kpi-card">
+            <span class="ds-kpi-val">26.68%</span>
+            <span class="ds-kpi-label" data-i18n="kpi2Label">Delay rate</span>
+          </div>
+          <div class="ds-kpi-card">
+            <span class="ds-kpi-val">41.45%</span>
+            <span class="ds-kpi-label" data-i18n="kpi3Label">Delays in stormy weather</span>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="ds-chips-row">
+          <a href="https://github.com/Esam-Haraz/Supply-Chain---Shipment-Deliveries" target="_blank" rel="noopener noreferrer" class="ds-btn ds-btn-primary" data-i18n="btnRepo">
+            GitHub Repository ↗
+          </a>
+          <a href="https://github.com/Esam-Haraz/Supply-Chain---Shipment-Deliveries/blob/main/README.md" target="_blank" rel="noopener noreferrer" class="ds-btn ds-btn-secondary" data-i18n="btnReadmeEn">
+            README (English) ↗
+          </a>
+          <a href="https://github.com/Esam-Haraz/Supply-Chain---Shipment-Deliveries/blob/main/README.ar.md" target="_blank" rel="noopener noreferrer" class="ds-btn ds-btn-secondary" data-i18n="btnReadmeAr">
+            README (العربية) ↗
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         2. BUSINESS QUESTION
+         ====================================================================== -->
+    <section class="ds-section" id="sec-question" aria-labelledby="q-title">
+      <div class="ds-container">
+        <div class="ds-section-header">
+          <h2 class="ds-section-title" id="q-title" data-i18n="qTitle">Business question &amp; goals</h2>
+        </div>
+
+        <div class="ds-node">
+          <div class="ds-node-body" style="display: flex; flex-direction: column; gap: var(--space-3);">
+            <p data-i18n="qPara1">
+              This analysis evaluates 25,000 shipment records from a public Kaggle logistics dataset (~5,000 shipments per region) to identify what separates on-time deliveries from delayed or failed shipments.
+            </p>
+            <p data-i18n="qPara2">
+              The investigation focuses on four operational areas: weather conditions, delivery partner and vehicle combinations, shipping modes (such as Express), and how delivery cost scales with shipment distance.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         3. ANALYSIS PIPELINE (4 STEPS WITH NUMBERING)
+         ====================================================================== -->
+    <section class="ds-section" id="sec-pipeline" aria-labelledby="pipe-title">
+      <div class="ds-container">
+        <div class="ds-section-header">
+          <h2 class="ds-section-title" id="pipe-title" data-i18n="pipeTitle">Analysis pipeline</h2>
+          <p class="ds-section-desc" data-i18n="pipeDesc">
+            Workflow from raw CSV inspection to interactive Excel filtering and PostgreSQL verification.
+          </p>
+        </div>
+
+        <svg class="ds-connector" data-scroll-fill viewBox="0 0 800 24" preserveAspectRatio="none" style="inline-size: 100%; block-size: 24px; margin-block-end: var(--space-3);" aria-hidden="true">
+          <line class="ds-connector-base" x1="0" y1="12" x2="800" y2="12"></line>
+          <line class="ds-connector-fill" x1="0" y1="12" x2="800" y2="12"></line>
+        </svg>
+
+        <div class="ds-pipeline-row">
+          <div class="ds-pipeline-step">
+            <span class="ds-step-badge">Step 01</span>
+            <h3 style="font-size: var(--text-h3);" data-i18n="pStep1Title">Raw CSV</h3>
+            <p style="font-size: var(--text-sm); color: var(--ink-muted);" data-i18n="pStep1Body">
+              Loaded 25,000 shipment rows and audited identifier uniqueness, shipment statuses, distance, weight, and timing columns.
+            </p>
+          </div>
+
+          <div class="ds-pipeline-step">
+            <span class="ds-step-badge">Step 02</span>
+            <h3 style="font-size: var(--text-h3);" data-i18n="pStep2Title">Excel cleaning</h3>
+            <p style="font-size: var(--text-sm); color: var(--ink-muted);" data-i18n="pStep2Body">
+              Standardized fields in Excel, preserved the original dataset untouched, and flagged zeroed time columns before analysis.
+            </p>
+          </div>
+
+          <div class="ds-pipeline-step">
+            <span class="ds-step-badge">Step 03</span>
+            <h3 style="font-size: var(--text-h3);" data-i18n="pStep3Title">PostgreSQL</h3>
+            <p style="font-size: var(--text-sm); color: var(--ink-muted);" data-i18n="pStep3Body">
+              Created a relational table with a serial primary key and executed 9 analytical queries covering delays, costs, ratings, and distance bands.
+            </p>
+          </div>
+
+          <div class="ds-pipeline-step">
+            <span class="ds-step-badge">Step 04</span>
+            <h3 style="font-size: var(--text-h3);" data-i18n="pStep4Title">Excel dashboard</h3>
+            <p style="font-size: var(--text-sm); color: var(--ink-muted);" data-i18n="pStep4Body">
+              Built Pivot Tables and an interactive dashboard with slicers for Delivery Partner, Region, and Delivery Mode.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         4. FINDINGS (ZERO-BASELINE HORIZONTAL BARS & CALLOUTS)
+         ====================================================================== -->
+    <section class="ds-section" id="sec-findings" aria-labelledby="find-title">
+      <div class="ds-container">
+        <div class="ds-section-header">
+          <h2 class="ds-section-title" id="find-title" data-i18n="findTitle">Key findings</h2>
+          <p class="ds-section-desc" data-i18n="findDesc">
+            Dataset baselines: 25,000 shipments (~5,000 per region), 26.68% delay rate, 864.94 average delivery cost, 3.67/5 average rating, 150.39 km average distance, and 25.15 kg average weight.
+          </p>
+        </div>
+
+        <div class="ds-findings-list">
+
+          <!-- Finding 1: Weather vs Delay Rate (4 Comparable Percentages -> Zero-Baseline Horizontal Bars) -->
+          <article class="ds-finding-card">
+            <div>
+              <h3 class="ds-finding-title" data-i18n="f1Title">
+                Stormy and rainy weather more than double shipment delay rates compared to clear and cold weather.
+              </h3>
+              <p class="ds-finding-note" data-i18n="f1Note">
+                Weather condition is the strongest separator of shipment delays across the dataset.
+              </p>
+            </div>
+
+            <div class="ds-bar-chart" role="img" aria-label="Delay rate by weather condition: Stormy 41.45%, Rainy 37.35%, Clear 17.43%, Cold 16.02%">
+              <div class="ds-bar-row">
+                <div class="ds-bar-meta">
+                  <span class="ds-bar-label" data-i18n="wStormy">Stormy weather</span>
+                  <span class="ds-bar-val">41.45%</span>
+                </div>
+                <div class="ds-bar-track">
+                  <div class="ds-bar-fill" style="--bar-pct: 41.45;"></div>
+                </div>
+              </div>
+
+              <div class="ds-bar-row">
+                <div class="ds-bar-meta">
+                  <span class="ds-bar-label" data-i18n="wRainy">Rainy weather</span>
+                  <span class="ds-bar-val">37.35%</span>
+                </div>
+                <div class="ds-bar-track">
+                  <div class="ds-bar-fill" style="--bar-pct: 37.35;"></div>
+                </div>
+              </div>
+
+              <div class="ds-bar-row">
+                <div class="ds-bar-meta">
+                  <span class="ds-bar-label" data-i18n="wClear">Clear weather</span>
+                  <span class="ds-bar-val">17.43%</span>
+                </div>
+                <div class="ds-bar-track">
+                  <div class="ds-bar-fill" style="--bar-pct: 17.43;"></div>
+                </div>
+              </div>
+
+              <div class="ds-bar-row">
+                <div class="ds-bar-meta">
+                  <span class="ds-bar-label" data-i18n="wCold">Cold weather</span>
+                  <span class="ds-bar-val">16.02%</span>
+                </div>
+                <div class="ds-bar-track">
+                  <div class="ds-bar-fill" style="--bar-pct: 16.02;"></div>
+                </div>
+              </div>
+            </div>
+
+            <table class="ds-sr-only">
+              <caption>Delay rate by weather condition</caption>
+              <thead>
+                <tr><th scope="col">Weather condition</th><th scope="col">Delay rate</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Stormy</td><td>41.45%</td></tr>
+                <tr><td>Rainy</td><td>37.35%</td></tr>
+                <tr><td>Clear</td><td>17.43%</td></tr>
+                <tr><td>Cold</td><td>16.02%</td></tr>
+              </tbody>
+            </table>
+          </article>
+
+          <!-- Finding 2: Shipment Status Counts (3 Comparable Counts -> Zero-Baseline Bars) -->
+          <article class="ds-finding-card">
+            <div>
+              <h3 class="ds-finding-title" data-i18n="f2Title">
+                Across 25,000 shipments, 18,331 were delivered, 5,341 were delayed, and 1,328 failed.
+              </h3>
+              <p class="ds-finding-note" data-i18n="f2Note">
+                Shipment counts grouped by final delivery status (overall delay rate in the dataset is 26.68%).
+              </p>
+            </div>
+
+            <div class="ds-bar-chart" role="img" aria-label="Shipment counts by status: Delivered 18,331, Delayed 5,341, Failed 1,328">
+              <div class="ds-bar-row">
+                <div class="ds-bar-meta">
+                  <span class="ds-bar-label" data-i18n="stDelivered">Delivered</span>
+                  <span class="ds-bar-val">18,331</span>
+                </div>
+                <div class="ds-bar-track">
+                  <div class="ds-bar-fill" style="--bar-pct: 73.32;"></div>
+                </div>
+              </div>
+
+              <div class="ds-bar-row">
+                <div class="ds-bar-meta">
+                  <span class="ds-bar-label" data-i18n="stDelayed">Delayed</span>
+                  <span class="ds-bar-val">5,341</span>
+                </div>
+                <div class="ds-bar-track">
+                  <div class="ds-bar-fill" style="--bar-pct: 21.36;"></div>
+                </div>
+              </div>
+
+              <div class="ds-bar-row">
+                <div class="ds-bar-meta">
+                  <span class="ds-bar-label" data-i18n="stFailed">Failed</span>
+                  <span class="ds-bar-val">1,328</span>
+                </div>
+                <div class="ds-bar-track">
+                  <div class="ds-bar-fill" style="--bar-pct: 5.31;"></div>
+                </div>
+              </div>
+            </div>
+
+            <table class="ds-sr-only">
+              <caption>Shipment count by status</caption>
+              <thead>
+                <tr><th scope="col">Status</th><th scope="col">Shipments</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Delivered</td><td>18,331</td></tr>
+                <tr><td>Delayed</td><td>5,341</td></tr>
+                <tr><td>Failed</td><td>1,328</td></tr>
+              </tbody>
+            </table>
+          </article>
+
+          <!-- Finding 3: Distance vs Delivery Cost (2 Comparable Values -> Zero-Baseline Bars) -->
+          <article class="ds-finding-card">
+            <div>
+              <h3 class="ds-finding-title" data-i18n="f3Title">
+                Average delivery cost scales linearly with distance, rising from 239.64 (0–50 km) to 1,365.76 (200+ km).
+              </h3>
+              <p class="ds-finding-note" data-i18n="f3Note">
+                Overall average delivery cost is 864.94 across an average shipment distance of 150.39 km and average weight of 25.15 kg.
+              </p>
+            </div>
+
+            <div class="ds-bar-chart" role="img" aria-label="Average delivery cost by distance band: 0 to 50 km is 239.64, 200+ km is 1,365.76">
+              <div class="ds-bar-row">
+                <div class="ds-bar-meta">
+                  <span class="ds-bar-label" data-i18n="distShort">0–50 km distance band</span>
+                  <span class="ds-bar-val">239.64</span>
+                </div>
+                <div class="ds-bar-track">
+                  <div class="ds-bar-fill" style="--bar-pct: 15.98;"></div>
+                </div>
+              </div>
+
+              <div class="ds-bar-row">
+                <div class="ds-bar-meta">
+                  <span class="ds-bar-label" data-i18n="distLong">200+ km distance band</span>
+                  <span class="ds-bar-val">1,365.76</span>
+                </div>
+                <div class="ds-bar-track">
+                  <div class="ds-bar-fill" style="--bar-pct: 91.05;"></div>
+                </div>
+              </div>
+            </div>
+
+            <table class="ds-sr-only">
+              <caption>Average delivery cost by distance band</caption>
+              <thead>
+                <tr><th scope="col">Distance band</th><th scope="col">Average delivery cost</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>0–50 km</td><td>239.64</td></tr>
+                <tr><td>200+ km</td><td>1,365.76</td></tr>
+              </tbody>
+            </table>
+          </article>
+
+          <!-- Finding 4: Partner/Vehicle Parity & Express Rating (Standout Callouts) -->
+          <article class="ds-finding-card">
+            <div>
+              <h3 class="ds-finding-title" data-i18n="f4Title">
+                Top partner and vehicle combinations cluster between 28.93% and 31.72% delay rates, while Express mode receives the lowest rating at 2.72/5.
+              </h3>
+            </div>
+
+            <div class="ds-callout">
+              <span class="ds-callout-num">28.93% – 31.72%</span>
+              <p class="ds-callout-text" data-i18n="f4Callout1">
+                Delay rate range across the top 10 delivery partner and vehicle combinations; no single combination stands out, and shipment distance does not explain delays.
+              </p>
+            </div>
+
+            <div class="ds-callout">
+              <span class="ds-callout-num">2.72 / 5</span>
+              <p class="ds-callout-text" data-i18n="f4Callout2">
+                Lowest average rating recorded for Express delivery compared to the 3.67/5 overall average (higher customer expectations for expedited shipping is a possible explanation).
+              </p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         5. DASHBOARD SCREENSHOT WITH KEYBOARD LIGHTBOX
+         ====================================================================== -->
+    <section class="ds-section" id="sec-dashboards" aria-labelledby="dash-title">
+      <div class="ds-container">
+        <div class="ds-section-header">
+          <h2 class="ds-section-title" id="dash-title" data-i18n="dashTitle">Interactive dashboard</h2>
+          <p class="ds-section-desc" data-i18n="dashDesc">
+            Click the dashboard frame to inspect full-size charts and slicers (Delivery Partner, Region, and Delivery Mode). Press Esc to close.
+          </p>
+        </div>
+
+        <div class="ds-dash-grid">
+          <figure class="ds-dash-frame">
+            <button type="button" class="ds-dash-trigger" aria-label="Zoom Excel Dashboard">
+              <img src="./Excel_Dashboard.webp"
+                   data-asset-name="Excel_Dashboard.webp"
+                   data-i18n-alt="dashImgAlt"
+                   alt="Excel dashboard showing shipment delay rates by weather, delivery partner, region, and delivery mode slicers"
+                   width="1280"
+                   height="720"
+                   loading="lazy">
+            </button>
+            <figcaption class="ds-dash-caption">
+              <span data-i18n="dashCap">Excel Dashboard — Delivery Partner, Region &amp; Delivery Mode Slicers</span>
+              <span class="ds-chip">Excel_Dashboard.webp</span>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         6. SQL QUERIES (EXACT .sql FILENAMES IN <summary>, SCREENSHOTS ONLY)
+         ====================================================================== -->
+    <section class="ds-section" id="sec-sql" aria-labelledby="sql-title">
+      <div class="ds-container">
+        <div class="ds-section-header">
+          <h2 class="ds-section-title" id="sql-title" data-i18n="sqlTitle">PostgreSQL queries</h2>
+          <p class="ds-section-desc" data-i18n="sqlDesc">
+            Expand any file below to view the PostgreSQL query and output screenshot from the repository.
+          </p>
+        </div>
+
+        <div class="ds-accordion-list">
+          <details class="ds-details">
+            <summary class="ds-summary">
+              <span>Create_Table.sql</span>
+              <span class="ds-summary-indicator" aria-hidden="true">+</span>
+            </summary>
+            <div class="ds-details-body">
+              <img src="./Create_Table.webp" data-asset-name="Create_Table.webp" alt="PostgreSQL query screenshot for Create_Table.sql" width="1200" height="675" loading="lazy">
+            </div>
+          </details>
+
+          <details class="ds-details">
+            <summary class="ds-summary">
+              <span>total_deliveries_delayed_percentage.sql</span>
+              <span class="ds-summary-indicator" aria-hidden="true">+</span>
+            </summary>
+            <div class="ds-details-body">
+              <img src="./total_deliveries_delayed_percentage.webp" data-asset-name="total_deliveries_delayed_percentage.webp" alt="PostgreSQL query screenshot for total_deliveries_delayed_percentage.sql" width="1200" height="675" loading="lazy">
+            </div>
+          </details>
+
+          <details class="ds-details">
+            <summary class="ds-summary">
+              <span>avg_delivery_cost_rating.sql</span>
+              <span class="ds-summary-indicator" aria-hidden="true">+</span>
+            </summary>
+            <div class="ds-details-body">
+              <img src="./avg_delivery_cost_rating.webp" data-asset-name="avg_delivery_cost_rating.webp" alt="PostgreSQL query screenshot for avg_delivery_cost_rating.sql" width="1200" height="675" loading="lazy">
+            </div>
+          </details>
+
+          <details class="ds-details">
+            <summary class="ds-summary">
+              <span>deliveries_by_region.sql</span>
+              <span class="ds-summary-indicator" aria-hidden="true">+</span>
+            </summary>
+            <div class="ds-details-body">
+              <img src="./deliveries_by_region.webp" data-asset-name="deliveries_by_region.webp" alt="PostgreSQL query screenshot for deliveries_by_region.sql" width="1200" height="675" loading="lazy">
+            </div>
+          </details>
+
+          <details class="ds-details">
+            <summary class="ds-summary">
+              <span>deliveries_by_status.sql</span>
+              <span class="ds-summary-indicator" aria-hidden="true">+</span>
+            </summary>
+            <div class="ds-details-body">
+              <img src="./deliveries_by_status.webp" data-asset-name="deliveries_by_status.webp" alt="PostgreSQL query screenshot for deliveries_by_status.sql" width="1200" height="675" loading="lazy">
+            </div>
+          </details>
+
+          <details class="ds-details">
+            <summary class="ds-summary">
+              <span>avg_distance_weight.sql</span>
+              <span class="ds-summary-indicator" aria-hidden="true">+</span>
+            </summary>
+            <div class="ds-details-body">
+              <img src="./avg_distance_weight.webp" data-asset-name="avg_distance_weight.webp" alt="PostgreSQL query screenshot for avg_distance_weight.sql" width="1200" height="675" loading="lazy">
+            </div>
+          </details>
+
+          <details class="ds-details">
+            <summary class="ds-summary">
+              <span>weather_vs_delayed.sql</span>
+              <span class="ds-summary-indicator" aria-hidden="true">+</span>
+            </summary>
+            <div class="ds-details-body">
+              <img src="./weather_vs_delayed.webp" data-asset-name="weather_vs_delayed.webp" alt="PostgreSQL query screenshot for weather_vs_delayed.sql" width="1200" height="675" loading="lazy">
+            </div>
+          </details>
+
+          <details class="ds-details">
+            <summary class="ds-summary">
+              <span>delay_rate_by_partner_vehicle.sql</span>
+              <span class="ds-summary-indicator" aria-hidden="true">+</span>
+            </summary>
+            <div class="ds-details-body">
+              <img src="./delay_rate_by_partner_vehicle.webp" data-asset-name="delay_rate_by_partner_vehicle.webp" alt="PostgreSQL query screenshot for delay_rate_by_partner_vehicle.sql" width="1200" height="675" loading="lazy">
+            </div>
+          </details>
+
+          <details class="ds-details">
+            <summary class="ds-summary">
+              <span>delivery_mode_vs_rating.sql</span>
+              <span class="ds-summary-indicator" aria-hidden="true">+</span>
+            </summary>
+            <div class="ds-details-body">
+              <img src="./delivery_mode_vs_rating.webp" data-asset-name="delivery_mode_vs_rating.webp" alt="PostgreSQL query screenshot for delivery_mode_vs_rating.sql" width="1200" height="675" loading="lazy">
+            </div>
+          </details>
+
+          <details class="ds-details">
+            <summary class="ds-summary">
+              <span>distance_vs_cost.sql</span>
+              <span class="ds-summary-indicator" aria-hidden="true">+</span>
+            </summary>
+            <div class="ds-details-body">
+              <img src="./distance_vs_cost.webp" data-asset-name="distance_vs_cost.webp" alt="PostgreSQL query screenshot for distance_vs_cost.sql" width="1200" height="675" loading="lazy">
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         7. DATA QUALITY & LIMITATIONS
+         ====================================================================== -->
+    <section class="ds-section" id="sec-quality" aria-labelledby="qual-title">
+      <div class="ds-container">
+        <div class="ds-section-header">
+          <h2 class="ds-section-title" id="qual-title" data-i18n="qualTitle">Data quality &amp; limitations</h2>
+        </div>
+
+        <div class="ds-notice-warn">
+          <strong data-i18n="qualLead">Documented dataset issues handled during preparation:</strong>
+          <ul>
+            <li data-i18n="qualItem1">
+              The source <code>delivery_id</code> column contained duplicate entries and decimal values, so a surrogate <code>row_id SERIAL</code> primary key was generated in PostgreSQL while preserving the original dataset intact.
+            </li>
+            <li data-i18n="qualItem2">
+              Both <code>delivery_time_hours</code> and <code>expected_time_hours</code> consisted entirely of zeros across all rows, making it impossible to answer the planned delivery time gap question.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         8. HOW TO REPRODUCE (FOLDER NAMES & GENERAL STEPS ONLY)
+         ====================================================================== -->
+    <section class="ds-section" id="sec-reproduce" aria-labelledby="repro-title">
+      <div class="ds-container">
+        <div class="ds-section-header">
+          <h2 class="ds-section-title" id="repro-title" data-i18n="reproTitle">How to reproduce</h2>
+        </div>
+
+        <ol class="ds-steps-list">
+          <li data-i18n="repro1">Clone or download the GitHub repository containing the raw dataset and project folders.</li>
+          <li data-i18n="repro2">Open the <code>Excel/</code> folder to inspect the cleaned spreadsheet, Pivot Tables, and interactive slicer dashboard.</li>
+          <li data-i18n="repro3">Create a PostgreSQL database and run the table creation script inside the <code>SQL/</code> folder before importing the dataset.</li>
+          <li data-i18n="repro4">Execute the remaining analytical scripts in the <code>SQL/</code> folder to reproduce all delay, cost, rating, and distance metrics.</li>
+        </ol>
+
+        <!-- 9. Project Navigation & Contact -->
+        <nav class="ds-project-nav" aria-label="Project navigation">
+          <a href="../../../" class="ds-btn ds-btn-secondary" data-i18n="navBack">← Back to Data Analysis network</a>
+          <div class="ds-chips-row">
+            <a href="mailto:esamv20@gmail.com" class="ds-btn ds-btn-secondary" data-contact-cta data-i18n="navContact">Contact</a>
+            <a href="../hr-attrition/" class="ds-btn ds-btn-primary" data-i18n="navNext">Next: HR Attrition Analysis →</a>
+          </div>
+        </nav>
+      </div>
+    </section>
+  </main>
+
+  <!-- Accessible Modal Lightbox -->
+  <div class="ds-lightbox" id="ds-lightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="ds-lightbox-title">
+    <div class="ds-lightbox-dialog">
+      <div class="ds-lightbox-bar">
+        <span class="ds-lightbox-title" id="ds-lightbox-title">Dashboard preview</span>
+        <button type="button" class="ds-btn ds-btn-secondary" id="ds-lightbox-close" data-i18n="closeBtn">Close (Esc)</button>
+      </div>
+      <div class="ds-lightbox-body">
+        <img id="ds-lightbox-img" src="" alt="">
+      </div>
+    </div>
+  </div>
+
+  <!-- Site Footer -->
+  <footer class="ds-footer">
+    <div class="ds-container">
+      <div class="ds-footer-grid">
+        <div>
+          <strong style="font-family: var(--font-display); font-size: 1.05rem;" data-i18n="brandName">Esam Haraz</strong>
+          <p style="font-size: var(--text-sm); color: var(--ink-muted); margin-block-start: var(--space-1);" data-i18n="footerTagline">
+            Data Analysis Portfolio · SQL, Excel &amp; Power BI
+          </p>
+        </div>
+        <div class="ds-footer-links">
+          <a href="../../../" class="ds-btn ds-btn-secondary" data-i18n="navHome">Network Home</a>
+          <a href="https://www.linkedin.com/in/esam-haraz-459925402" target="_blank" rel="noopener noreferrer" class="ds-btn ds-btn-secondary">LinkedIn ↗</a>
+          <a href="mailto:esamv20@gmail.com" class="ds-btn ds-btn-secondary" data-contact-cta>esamv20@gmail.com</a>
+        </div>
+      </div>
+
+      <div class="ds-footer-bottom">
+        <span data-i18n="copyright">© 2026 Esam Haraz.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       BILINGUAL DICTIONARY (EN & AR) — CONSOLIDATED FOR EASY REVIEW
+       ========================================================================== -->
+  <script>
+    window.PAGE_I18N = {
+      en: {
+        skipToMain: "Skip to main content",
+        brandName: "Esam Haraz",
+        domainChip: "Logistics",
+        practiceChip: "Practice project · public Kaggle dataset",
+        projectTitle: "Supply Chain & Shipment Deliveries Analysis",
+        heroQuestion: "Which operational factors drive shipment delays, delivery costs, and customer satisfaction across 25,000 deliveries?",
+        toolExcelDetail: "Pivot Tables & Slicers",
+        kpi1Label: "Total shipments",
+        kpi2Label: "Delay rate",
+        kpi3Label: "Delays in stormy weather",
+        btnRepo: "GitHub Repository ↗",
+        btnReadmeEn: "README (English) ↗",
+        btnReadmeAr: "README (العربية) ↗",
+        qTitle: "Business question & goals",
+        qPara1: "This analysis evaluates 25,000 shipment records from a public Kaggle logistics dataset (~5,000 shipments per region) to identify what separates on-time deliveries from delayed or failed shipments.",
+        qPara2: "The investigation focuses on four operational areas: weather conditions, delivery partner and vehicle combinations, shipping modes (such as Express), and how delivery cost scales with shipment distance.",
+        pipeTitle: "Analysis pipeline",
+        pipeDesc: "Workflow from raw CSV inspection to interactive Excel filtering and PostgreSQL verification.",
+        pStep1Title: "Raw CSV",
+        pStep1Body: "Loaded 25,000 shipment rows and audited identifier uniqueness, shipment statuses, distance, weight, and timing columns.",
+        pStep2Title: "Excel cleaning",
+        pStep2Body: "Standardized fields in Excel, preserved the original dataset untouched, and flagged zeroed time columns before analysis.",
+        pStep3Title: "PostgreSQL",
+        pStep3Body: "Created a relational table with a serial primary key and executed 9 analytical queries covering delays, costs, ratings, and distance bands.",
+        pStep4Title: "Excel dashboard",
+        pStep4Body: "Built Pivot Tables and an interactive dashboard with slicers for Delivery Partner, Region, and Delivery Mode.",
+        findTitle: "Key findings",
+        findDesc: "Dataset baselines: 25,000 shipments (~5,000 per region), 26.68% delay rate, 864.94 average delivery cost, 3.67/5 average rating, 150.39 km average distance, and 25.15 kg average weight.",
+        f1Title: "Stormy and rainy weather more than double shipment delay rates compared to clear and cold weather.",
+        f1Note: "Weather condition is the strongest separator of shipment delays across the dataset.",
+        wStormy: "Stormy weather",
+        wRainy: "Rainy weather",
+        wClear: "Clear weather",
+        wCold: "Cold weather",
+        f2Title: "Across 25,000 shipments, 18,331 were delivered, 5,341 were delayed, and 1,328 failed.",
+        f2Note: "Shipment counts grouped by final delivery status (overall delay rate in the dataset is 26.68%).",
+        stDelivered: "Delivered",
+        stDelayed: "Delayed",
+        stFailed: "Failed",
+        f3Title: "Average delivery cost scales linearly with distance, rising from 239.64 (0–50 km) to 1,365.76 (200+ km).",
+        f3Note: "Overall average delivery cost is 864.94 across an average shipment distance of 150.39 km and average weight of 25.15 kg.",
+        distShort: "0–50 km distance band",
+        distLong: "200+ km distance band",
+        f4Title: "Top partner and vehicle combinations cluster between 28.93% and 31.72% delay rates, while Express mode receives the lowest rating at 2.72/5.",
+        f4Callout1: "Delay rate range across the top 10 delivery partner and vehicle combinations; no single combination stands out, and shipment distance does not explain delays.",
+        f4Callout2: "Lowest average rating recorded for Express delivery compared to the 3.67/5 overall average (higher customer expectations for expedited shipping is a possible explanation).",
+        dashTitle: "Interactive dashboard",
+        dashDesc: "Click the dashboard frame to inspect full-size charts and slicers (Delivery Partner, Region, and Delivery Mode). Press Esc to close.",
+        dashImgAlt: "Excel dashboard showing shipment delay rates by weather, delivery partner, region, and delivery mode slicers",
+        dashCap: "Excel Dashboard — Delivery Partner, Region & Delivery Mode Slicers",
+        sqlTitle: "PostgreSQL queries",
+        sqlDesc: "Expand any file below to view the PostgreSQL query and output screenshot from the repository.",
+        qualTitle: "Data quality & limitations",
+        qualLead: "Documented dataset issues handled during preparation:",
+        qualItem1: "The source delivery_id column contained duplicate entries and decimal values, so a surrogate row_id SERIAL primary key was generated in PostgreSQL while preserving the original dataset intact.",
+        qualItem2: "Both delivery_time_hours and expected_time_hours consisted entirely of zeros across all rows, making it impossible to answer the planned delivery time gap question.",
+        reproTitle: "How to reproduce",
+        repro1: "Clone or download the GitHub repository containing the raw dataset and project folders.",
+        repro2: "Open the Excel/ folder to inspect the cleaned spreadsheet, Pivot Tables, and interactive slicer dashboard.",
+        repro3: "Create a PostgreSQL database and run the table creation script inside the SQL/ folder before importing the dataset.",
+        repro4: "Execute the remaining analytical scripts in the SQL/ folder to reproduce all delay, cost, rating, and distance metrics.",
+        navBack: "← Back to Data Analysis network",
+        navContact: "Contact",
+        navNext: "Next: HR Attrition Analysis →",
+        closeBtn: "Close (Esc)",
+        footerTagline: "Data Analysis Portfolio · SQL, Excel & Power BI",
+        navHome: "Network Home",
+        copyright: "© 2026 Esam Haraz."
+      },
+      ar: {
+        skipToMain: "تخطي إلى المحتوى الرئيسي",
+        brandName: "عصام حراز",
+        domainChip: "الخدمات اللوجستية",
+        practiceChip: "مشروع تدريبي · مجموعة بيانات عامة من Kaggle",
+        projectTitle: "تحليل سلاسل الإمداد وتسليم الشحنات",
+        heroQuestion: "ما العوامل التشغيلية التي تسبب تأخير الشحنات وتؤثر على تكلفة التوصيل ورضا العملاء عبر 25,000 شحنة؟",
+        toolExcelDetail: "Pivot Tables وعوامل التصفية Slicers",
+        kpi1Label: "إجمالي الشحنات",
+        kpi2Label: "معدل التأخير (Delay rate)",
+        kpi3Label: "التأخير في الطقس العاصف",
+        btnRepo: "مستودع GitHub ↗",
+        btnReadmeEn: "ملف README (إنجليزي) ↗",
+        btnReadmeAr: "ملف README (عربي) ↗",
+        qTitle: "سؤال العمل والأهداف",
+        qPara1: "يقوم هذا التحليل بدراسة 25,000 سجل شحنة من مجموعة بيانات لوجستية عامة على Kaggle (بمعدل ~5,000 شحنة لكل منطقة) لتحديد العوامل التي تميز الشحنات المسلمة في موعدها عن الشحنات المتأخرة أو الفاشلة.",
+        qPara2: "يركز التحليل على أربعة محاور تشغيلية: أحوال الطقس، وتوليفات شركاء التوصيل والمركبات، وأوضاع الشحن (مثل الشحن السريع Express)، وكيفية تغير تكلفة التوصيل مع المسافة.",
+        pipeTitle: "مسار التحليل",
+        pipeDesc: "خطوات العمل من فحص ملف CSV الخام وحتى لوحة المعلومات التفاعلية في Excel والتحقق عبر PostgreSQL.",
+        pStep1Title: "البيانات الخام (CSV)",
+        pStep1Body: "تحميل 25,000 سجل شحنة وفحص فرادة المعرفات وحالات الشحن والمسافة والوزن وأعمدة التوقيت.",
+        pStep2Title: "التنظيف في Excel",
+        pStep2Body: "توحيد الحقول في Excel مع الحفاظ على مجموعة البيانات الأصلية دون تعديل وتوثيق الأعمدة الصفرية قبل التحليل.",
+        pStep3Title: "تحليل PostgreSQL",
+        pStep3Body: "إنشاء جدول علائقي بمفتاح أساسي متسلسل وتنفيذ 9 استعلامات تحليلية تغطي التأخيرات والتكاليف والتقييمات وشرائح المسافة.",
+        pStep4Title: "لوحة معلومات Excel",
+        pStep4Body: "بناء جداول Pivot ولوحة معلومات تفاعلية مزودة بعوامل تصفية (Slicers) لشريك التوصيل والمنطقة ووضع الشحن.",
+        findTitle: "أبرز النتائج",
+        findDesc: "المؤشرات الأساسية للبيانات: 25,000 شحنة (~5,000 لكل منطقة)، معدل التأخير 26.68%، متوسط تكلفة التوصيل 864.94، متوسط التقييم 3.67/5، متوسط المسافة 150.39 كم، ومتوسط الوزن 25.15 كجم.",
+        f1Title: "الطقس العاصف والممطر يضاعفان معدلات تأخير الشحنات بأكثر من الضعف مقارنة بالطقس الصافي والبارد.",
+        f1Note: "تُعد حالة الطقس العامل الأكثر تأثيراً في تباين معدلات تأخير الشحنات عبر مجموعة البيانات.",
+        wStormy: "الطقس العاصف (Stormy)",
+        wRainy: "الطقس الممطر (Rainy)",
+        wClear: "الطقس الصافي (Clear)",
+        wCold: "الطقس البارد (Cold)",
+        f2Title: "من بين 25,000 شحنة، تم تسليم 18,331 شحنة بنجاح، وتأخرت 5,341 شحنة، وفشلت 1,328 شحنة.",
+        f2Note: "توزيع أعداد الشحنات حسب حالة التسليم النهائية (معدل التأخير الإجمالي في البيانات هو 26.68%).",
+        stDelivered: "تم التسليم (Delivered)",
+        stDelayed: "متأخرة (Delayed)",
+        stFailed: "فشلت (Failed)",
+        f3Title: "ترتفع تكلفة التوصيل خطياً مع المسافة، من 239.64 لشريحة (0–50 كم) إلى 1,365.76 لشريحة (200+ كم).",
+        f3Note: "يبلغ متوسط تكلفة التوصيل العام 864.94 عبر متوسط مسافة 150.39 كم ومتوسط وزن 25.15 كجم.",
+        distShort: "شريحة المسافة 0–50 كم",
+        distLong: "شريحة المسافة 200+ كم",
+        f4Title: "تتقارب أعلى 10 توليفات لشركاء التوصيل والمركبات بين 28.93% و31.72% في معدل التأخير، بينما يسجل الشحن السريع Express أقل تقييم عند 2.72/5.",
+        f4Callout1: "نطاق معدل التأخير لأعلى 10 توليفات من شركاء التوصيل والمركبات؛ لا توجد توليفة واحدة منفردة تتصدر التأخير، كما أن المسافة ليست سبباً للتأخير.",
+        f4Callout2: "أقل متوسط تقييم مسجل لوضع الشحن السريع Express مقارنة بالمتوسط العام 3.67/5 (ارتفاع توقعات العملاء للشحن السريع يُعد تفسيراً محتملاً).",
+        dashTitle: "لوحة المعلومات التفاعلية",
+        dashDesc: "اضغط على إطار لوحة المعلومات لتكبير الرسوم البيانية وعوامل التصفية (شريك التوصيل، المنطقة، ووضع الشحن). اضغط Esc للإغلاق.",
+        dashImgAlt: "لوحة معلومات Excel تعرض معدلات تأخير الشحنات حسب الطقس مع عوامل تصفية لشريك التوصيل والمنطقة ووضع الشحن",
+        dashCap: "لوحة معلومات Excel — عوامل تصفية شريك التوصيل والمنطقة ووضع الشحن",
+        sqlTitle: "استعلامات PostgreSQL",
+        sqlDesc: "افتح أي ملف أدناه لعرض استعلام PostgreSQL ولقطة النتائج من المستودع.",
+        qualTitle: "جودة البيانات والقيود",
+        qualLead: "مشكلات البيانات الموثقة التي تمت معالجتها أثناء التجهيز:",
+        qualItem1: "احتوى عمود delivery_id الأصلي على قيم مكررة وأرقام عشرية، لذلك تم إنشاء مفتاح أساسي بديل row_id SERIAL في PostgreSQL مع الإبقاء على مجموعة البيانات الأصلية كما هي.",
+        qualItem2: "احتوى عمودا delivery_time_hours و expected_time_hours على أصفار بالكامل في جميع الصفوف، مما حال دون الإجابة عن سؤال فجوة وقت التسليم.",
+        reproTitle: "خطوات إعادة التشغيل",
+        repro1: "قم باستنساخ أو تنزيل مستودع GitHub الذي يضم مجموعة البيانات الخام ومجلدات المشروع.",
+        repro2: "افتح مجلد Excel/ لاستعراض الجدول المنظف وجداول Pivot ولوحة المعلومات التفاعلية.",
+        repro3: "أنشئ قاعدة بيانات في PostgreSQL وشغّل ملف إنشاء الجدول داخل مجلد SQL/ قبل استيراد البيانات.",
+        repro4: "نفّذ بقية ملفات الاستعلامات داخل مجلد SQL/ لإعادة استخراج جميع مؤشرات التأخير والتكلفة والتقييم والمسافة.",
+        navBack: "→ العودة إلى شبكة تحليل البيانات",
+        navContact: "تواصل معي",
+        navNext: "التالي: تحليل التسرب الوظيفي (HR) ←",
+        closeBtn: "إغلاق (Esc)",
+        footerTagline: "معرض أعمال تحليل البيانات · SQL و Excel و Power BI",
+        navHome: "الرئيسية",
+        copyright: "© 2026 عصام حراز."
+      }
+    };
+  </script>
+</body>
+</html>
