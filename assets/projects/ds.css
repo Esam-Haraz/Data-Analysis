@@ -141,6 +141,7 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: calc(var(--header-h) + var(--space-5));
   overflow-x: hidden;
+  max-inline-size: 100%;
 }
 
 body {
@@ -150,6 +151,7 @@ body {
   line-height: 1.65;
   min-height: 100dvh;
   overflow-x: hidden;
+  max-inline-size: 100%;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -219,7 +221,7 @@ img, svg {
   inset-block-start: var(--space-3);
 }
 
-/* Screen-Reader Only Utility (Used for Accessible Chart Data Tables) */
+/* Screen-Reader Only Utility (Used to wrap Accessible Chart Data Tables) */
 .ds-sr-only {
   position: absolute;
   inline-size: 1px;
@@ -228,6 +230,7 @@ img, svg {
   margin: -1px;
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
   white-space: nowrap;
   border: 0;
 }
@@ -601,6 +604,7 @@ img, svg {
   background-color: var(--bg-surface);
   border: 2px solid var(--rule-strong);
   z-index: 3;
+  transition: background-color 180ms ease, border-color 180ms ease;
 }
 
 .ds-port.is-connected {
@@ -937,8 +941,9 @@ img, svg {
     grid-template-columns: 1fr 1.05fr 1fr;
     grid-template-rows: auto auto;
     align-items: center;
-    gap: var(--space-6);
-    padding-block: var(--space-5);
+    column-gap: clamp(3.25rem, 6vw, 5.5rem);
+    row-gap: clamp(3.5rem, 6vw, 5.25rem);
+    padding-block: var(--space-6);
   }
 
   .ds-spider-svg {
@@ -947,15 +952,16 @@ img, svg {
     inset: 0;
     inline-size: 100%;
     block-size: 100%;
-    z-index: 1;
+    z-index: 3;
     pointer-events: none;
   }
 
   .ds-spider-ring {
     fill: none;
-    stroke: var(--rule);
-    stroke-width: 1;
-    stroke-dasharray: 4 4;
+    stroke: var(--rule-strong);
+    stroke-width: 1.35;
+    stroke-dasharray: 5 5;
+    opacity: 0.72;
   }
 
   .ds-spider-edge-base {
@@ -978,6 +984,17 @@ img, svg {
     stroke-width: 4;
     transition-duration: var(--motion-fill-dur);
     transition-timing-function: var(--motion-fill-ease);
+  }
+
+  .ds-spider-port {
+    fill: var(--bg-surface);
+    stroke: var(--ink);
+    stroke-width: 2;
+    transition: fill 180ms ease;
+  }
+
+  .ds-spider-port.is-active {
+    fill: var(--site-accent);
   }
 
   .ds-spider-center {
@@ -1007,7 +1024,7 @@ img, svg {
 }
 
 /* ----------------------------------------------------------------------------
-   9. WHAT I DO & 4-STEP HOW I WORK PIPELINE
+   9. WHAT I DO & 4-STEP CONNECTED PIPELINE WITH PORTS & STEP INDICATORS
    ---------------------------------------------------------------------------- */
 .ds-services-grid {
   display: grid;
@@ -1018,25 +1035,116 @@ img, svg {
 .ds-pipeline-row {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--space-3);
+  align-items: stretch;
+  gap: 0;
 }
 
-@media (min-width: 860px) {
+.ds-pipeline-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 100%;
+  block-size: 28px;
+  position: relative;
+  z-index: 2;
+}
+
+.ds-pipeline-link .ds-connector {
+  inline-size: 1px;
+  block-size: 100%;
+  overflow: visible;
+}
+
+@media (min-width: 960px) {
   .ds-pipeline-row {
-    grid-template-columns: repeat(4, 1fr);
-    gap: var(--space-4);
+    grid-template-columns: 1fr 34px 1fr 34px 1fr 34px 1fr;
+    align-items: stretch;
+  }
+
+  .ds-pipeline-link {
+    inline-size: 34px;
+    block-size: auto;
+    align-self: center;
+  }
+
+  .ds-pipeline-link .ds-connector {
+    inline-size: 100%;
+    block-size: 1px;
+  }
+
+  [dir="rtl"] .ds-pipeline-link .ds-connector {
+    transform: scaleX(-1);
   }
 }
 
 .ds-pipeline-step {
   background-color: var(--bg-surface);
-  border: 1px solid var(--rule-strong);
+  border: 1.5px solid var(--rule-strong);
   border-radius: var(--radius-lg);
   padding: var(--space-4);
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
+  justify-content: space-between;
+  gap: var(--space-3);
   position: relative;
+  transition: border-color 180ms ease;
+}
+
+.ds-pipeline-step:hover,
+.ds-pipeline-step:focus-within {
+  border-color: var(--ink);
+}
+
+/* Step Node Ports (Top/Bottom on Mobile, Start/End on Desktop) */
+.ds-port--in {
+  inset-block-start: -5px;
+  inset-inline-start: 50%;
+  transform: translateX(-50%);
+}
+
+[dir="rtl"] .ds-port--in {
+  transform: translateX(50%);
+}
+
+.ds-port--out {
+  inset-block-end: -5px;
+  inset-inline-start: 50%;
+  transform: translateX(-50%);
+}
+
+[dir="rtl"] .ds-port--out {
+  transform: translateX(50%);
+}
+
+@media (min-width: 960px) {
+  .ds-port--in {
+    inset-block-start: 50%;
+    inset-inline-start: -5px;
+    transform: translateY(-50%);
+  }
+
+  [dir="rtl"] .ds-port--in {
+    transform: translateY(-50%);
+  }
+
+  .ds-port--out {
+    inset-block-start: 50%;
+    inset-block-end: auto;
+    inset-inline-start: auto;
+    inset-inline-end: -5px;
+    transform: translateY(-50%);
+  }
+
+  [dir="rtl"] .ds-port--out {
+    transform: translateY(-50%);
+  }
+}
+
+.ds-step-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
 }
 
 .ds-step-badge {
@@ -1050,6 +1158,22 @@ img, svg {
   font-family: var(--font-mono);
   font-size: 0.75rem;
   font-weight: 700;
+}
+
+.ds-step-pct {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ink-muted);
+}
+
+.ds-step-meter {
+  margin-block-start: auto;
+  padding-block-start: var(--space-2);
+}
+
+.ds-step-meter .ds-progress {
+  block-size: 8px;
 }
 
 /* ----------------------------------------------------------------------------
