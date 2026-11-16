@@ -10,13 +10,12 @@
       baseUrl: "https://esam-haraz.github.io/Data-Analysis/",
       currentSiteId: "data",
       sitesGraph: [
-        { id: "hub", labelEn: "Services Hub", labelAr: "المركز الرئيسي", url: "https://esam-haraz.github.io/hub/" },
-        { id: "autodeploy", labelEn: "AutoDeploy", labelAr: "AutoDeploy", url: "https://esam-haraz.github.io/AutoDeploy/" },
-        { id: "data", labelEn: "Data Analysis", labelAr: "تحليل البيانات", url: "./" },
-        { id: "portfolio", labelEn: "Portfolio", labelAr: "معرض الأعمال", url: "https://esam-haraz.github.io/portfolio/" }
+        { id: "hub",           labelEn: "Services Hub",  labelAr: "المركز الرئيسي",   url: "https://esam-haraz.github.io/hub/" },
+        { id: "desktop-tools", labelEn: "Desktop Tools", labelAr: "أدوات سطح المكتب", url: "https://esam-haraz.github.io/Desktop-Tools/" },
+        { id: "data",          labelEn: "Data Analysis", labelAr: "تحليل البيانات",   url: "./" },
+        { id: "portfolio",     labelEn: "Portfolio",     labelAr: "معرض الأعمال",     url: "https://esam-haraz.github.io/portfolio/" }
       ],
-      /* Swap this single value to the Hub contact page URL once the Hub repo is live */
-      hubContactUrl: "mailto:esamv20@gmail.com",
+      hubContactUrl: "https://esam-haraz.github.io/hub/#contact",
       email: "esamv20@gmail.com",
       linkedinUrl: "https://www.linkedin.com/in/esam-haraz-459925402"
     };
@@ -97,9 +96,9 @@
         <span>Services Hub</span>
       </a>
       <span class="ds-mini-edge" aria-hidden="true"></span>
-      <a href="https://esam-haraz.github.io/AutoDeploy/" class="ds-mini-node">
+      <a href="https://esam-haraz.github.io/Desktop-Tools/" class="ds-mini-node">
         <span class="ds-mini-dot" aria-hidden="true"></span>
-        <span>AutoDeploy</span>
+        <span>Desktop Tools</span>
       </a>
       <span class="ds-mini-edge" aria-hidden="true"></span>
       <a href="./" class="ds-mini-node is-current" aria-current="page">
@@ -124,7 +123,7 @@
       </button>
       <div class="ds-nav-dropdown-menu" id="ds-nav-dropdown-menu" role="menu">
         <a href="https://esam-haraz.github.io/hub/" role="menuitem">Services Hub ↗</a>
-        <a href="https://esam-haraz.github.io/AutoDeploy/" role="menuitem">AutoDeploy ↗</a>
+        <a href="https://esam-haraz.github.io/Desktop-Tools/" role="menuitem">Desktop Tools ↗</a>
         <a href="./" class="is-current" aria-current="page" role="menuitem">Data Analysis ●</a>
         <a href="https://esam-haraz.github.io/portfolio/" role="menuitem">Portfolio ↗</a>
       </div>
@@ -451,7 +450,7 @@
           </div>
         </div>
 
-        <!-- Single Contact CTA (Bound to SITE_CONFIG.hubContactUrl -> mailto: until Hub is live) -->
+        <!-- Single Contact CTA (Bound to SITE_CONFIG.hubContactUrl -> Hub #contact) -->
         <div style="margin-block-start: var(--space-6); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-4); background-color: var(--bg-surface); border: 1.5px solid var(--rule-strong); border-radius: var(--radius-lg); padding: var(--space-5);">
           <div>
             <h3 style="font-size: var(--text-h3); margin-block-end: var(--space-1);" data-i18n="ctaBoxTitle">
@@ -461,7 +460,7 @@
               Reach out directly by email for data cleaning, SQL reporting, or dashboard projects.
             </p>
           </div>
-          <a href="mailto:esamv20@gmail.com" class="ds-btn ds-btn-primary" data-contact-cta data-i18n="ctaBoxBtn">
+          <a href="https://esam-haraz.github.io/hub/#contact" class="ds-btn ds-btn-primary" data-contact-cta data-i18n="ctaBoxBtn">
             Contact Esam Haraz →
           </a>
         </div>
@@ -485,7 +484,7 @@
           <a href="./assets/projects/hr-attrition/" class="ds-btn ds-btn-secondary" data-i18n="navHr">HR Attrition</a>
           <a href="./assets/projects/pizza-sales/" class="ds-btn ds-btn-secondary" data-i18n="navPizza">Pizza Sales</a>
           <a href="https://www.linkedin.com/in/esam-haraz-459925402" target="_blank" rel="noopener noreferrer" class="ds-btn ds-btn-secondary">LinkedIn ↗</a>
-          <a href="mailto:esamv20@gmail.com" class="ds-btn ds-btn-secondary" data-contact-cta>esamv20@gmail.com</a>
+          <a href="https://esam-haraz.github.io/hub/#contact" class="ds-btn ds-btn-secondary" data-contact-cta>esamv20@gmail.com</a>
         </div>
       </div>
 
@@ -496,7 +495,7 @@
   </footer>
 
   <!-- ==========================================================================
-       BILINGUAL DICTIONARY (EN & AR) — CONSOLIDATED FOR EASY REVIEW
+       BILINGUAL DICTIONARY (EN & AR)
        ========================================================================== -->
   <script>
     window.PAGE_I18N = {
