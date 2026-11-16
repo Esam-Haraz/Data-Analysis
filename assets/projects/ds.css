@@ -1044,14 +1044,15 @@ img, svg {
   align-items: center;
   justify-content: center;
   inline-size: 100%;
-  block-size: 28px;
+  block-size: 34px;
   position: relative;
   z-index: 2;
 }
 
 .ds-pipeline-link .ds-connector {
-  inline-size: 1px;
-  block-size: 100%;
+  inline-size: 34px;
+  block-size: 24px;
+  transform: rotate(90deg);
   overflow: visible;
 }
 
@@ -1068,8 +1069,7 @@ img, svg {
   }
 
   .ds-pipeline-link .ds-connector {
-    inline-size: 100%;
-    block-size: 1px;
+    transform: none;
   }
 
   [dir="rtl"] .ds-pipeline-link .ds-connector {
