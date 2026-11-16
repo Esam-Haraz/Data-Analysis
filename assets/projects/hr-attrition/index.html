@@ -236,7 +236,7 @@
     </section>
 
     <!-- ======================================================================
-         3. ANALYSIS PIPELINE (4 STEPS WITH NUMBERING)
+         3. ANALYSIS PIPELINE (4 CONNECTED NODES WITH PORTS & PROGRESS METERS)
          ====================================================================== -->
     <section class="ds-section" id="sec-pipeline" aria-labelledby="pipe-title">
       <div class="ds-container">
@@ -247,42 +247,111 @@
           </p>
         </div>
 
-        <svg class="ds-connector" data-scroll-fill viewBox="0 0 800 24" preserveAspectRatio="none" style="inline-size: 100%; block-size: 24px; margin-block-end: var(--space-3);" aria-hidden="true">
-          <line class="ds-connector-base" x1="0" y1="12" x2="800" y2="12"></line>
-          <line class="ds-connector-fill" x1="0" y1="12" x2="800" y2="12"></line>
-        </svg>
-
         <div class="ds-pipeline-row">
+          <!-- Step 01 -->
           <div class="ds-pipeline-step">
-            <span class="ds-step-badge">Step 01</span>
-            <h3 style="font-size: var(--text-h3);" data-i18n="pStep1Title">Raw CSV</h3>
-            <p style="font-size: var(--text-sm); color: var(--ink-muted);" data-i18n="pStep1Body">
-              Inspected 1,470 employee records covering demographics, department, job role, monthly income, overtime status, satisfaction, and tenure.
-            </p>
+            <span class="ds-port ds-port--out is-connected" aria-hidden="true"></span>
+            <div class="ds-step-top">
+              <span class="ds-step-badge">Step 01</span>
+              <span class="ds-step-pct">25%</span>
+            </div>
+            <div>
+              <h3 style="font-size: var(--text-h3); margin-block-end: var(--space-1);" data-i18n="pStep1Title">Raw CSV</h3>
+              <p style="font-size: var(--text-sm); color: var(--ink-muted);" data-i18n="pStep1Body">
+                Inspected 1,470 employee records covering demographics, department, job role, monthly income, overtime status, satisfaction, and tenure.
+              </p>
+            </div>
+            <div class="ds-step-meter">
+              <div class="ds-progress" aria-hidden="true">
+                <div class="ds-progress-fill" style="--progress: 0.25;"></div>
+              </div>
+            </div>
           </div>
 
-          <div class="ds-pipeline-step">
-            <span class="ds-step-badge">Step 02</span>
-            <h3 style="font-size: var(--text-h3);" data-i18n="pStep2Title">Excel cleaning</h3>
-            <p style="font-size: var(--text-sm); color: var(--ink-muted);" data-i18n="pStep2Body">
-              Prepared structured Pivot Tables and interactive slicers in Excel to cross-check segment headcounts and attrition breakdowns.
-            </p>
+          <!-- Connector 01 -> 02 -->
+          <div class="ds-pipeline-link" aria-hidden="true">
+            <svg class="ds-connector" data-scroll-fill data-connector-index="0" viewBox="0 0 34 24">
+              <line class="ds-connector-base" x1="0" y1="12" x2="34" y2="12"></line>
+              <line class="ds-connector-fill" x1="0" y1="12" x2="34" y2="12"></line>
+            </svg>
           </div>
 
+          <!-- Step 02 -->
           <div class="ds-pipeline-step">
-            <span class="ds-step-badge">Step 03</span>
-            <h3 style="font-size: var(--text-h3);" data-i18n="pStep3Title">SQL queries</h3>
-            <p style="font-size: var(--text-sm); color: var(--ink-muted);" data-i18n="pStep3Body">
-              Executed 10 analytical SQL queries measuring overtime impact, role attrition, income gaps, satisfaction levels, and tenure cohorts.
-            </p>
+            <span class="ds-port ds-port--in is-connected" aria-hidden="true"></span>
+            <span class="ds-port ds-port--out is-connected" aria-hidden="true"></span>
+            <div class="ds-step-top">
+              <span class="ds-step-badge">Step 02</span>
+              <span class="ds-step-pct">50%</span>
+            </div>
+            <div>
+              <h3 style="font-size: var(--text-h3); margin-block-end: var(--space-1);" data-i18n="pStep2Title">Excel cleaning</h3>
+              <p style="font-size: var(--text-sm); color: var(--ink-muted);" data-i18n="pStep2Body">
+                Prepared structured Pivot Tables and interactive slicers in Excel to cross-check segment headcounts and attrition breakdowns.
+              </p>
+            </div>
+            <div class="ds-step-meter">
+              <div class="ds-progress" aria-hidden="true">
+                <div class="ds-progress-fill" style="--progress: 0.50;"></div>
+              </div>
+            </div>
           </div>
 
+          <!-- Connector 02 -> 03 -->
+          <div class="ds-pipeline-link" aria-hidden="true">
+            <svg class="ds-connector" data-scroll-fill data-connector-index="1" viewBox="0 0 34 24">
+              <line class="ds-connector-base" x1="0" y1="12" x2="34" y2="12"></line>
+              <line class="ds-connector-fill" x1="0" y1="12" x2="34" y2="12"></line>
+            </svg>
+          </div>
+
+          <!-- Step 03 -->
           <div class="ds-pipeline-step">
-            <span class="ds-step-badge">Step 04</span>
-            <h3 style="font-size: var(--text-h3);" data-i18n="pStep4Title">Power BI dashboard</h3>
-            <p style="font-size: var(--text-sm); color: var(--ink-muted);" data-i18n="pStep4Body">
-              Built core DAX measures (Total Retained, Total Attrition, Retention Rate, Attrition Rate) using a green retention and red attrition theme.
-            </p>
+            <span class="ds-port ds-port--in is-connected" aria-hidden="true"></span>
+            <span class="ds-port ds-port--out is-connected" aria-hidden="true"></span>
+            <div class="ds-step-top">
+              <span class="ds-step-badge">Step 03</span>
+              <span class="ds-step-pct">75%</span>
+            </div>
+            <div>
+              <h3 style="font-size: var(--text-h3); margin-block-end: var(--space-1);" data-i18n="pStep3Title">SQL queries</h3>
+              <p style="font-size: var(--text-sm); color: var(--ink-muted);" data-i18n="pStep3Body">
+                Executed 10 analytical SQL queries measuring overtime impact, role attrition, income gaps, satisfaction levels, and tenure cohorts.
+              </p>
+            </div>
+            <div class="ds-step-meter">
+              <div class="ds-progress" aria-hidden="true">
+                <div class="ds-progress-fill" style="--progress: 0.75;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Connector 03 -> 04 -->
+          <div class="ds-pipeline-link" aria-hidden="true">
+            <svg class="ds-connector" data-scroll-fill data-connector-index="2" viewBox="0 0 34 24">
+              <line class="ds-connector-base" x1="0" y1="12" x2="34" y2="12"></line>
+              <line class="ds-connector-fill" x1="0" y1="12" x2="34" y2="12"></line>
+            </svg>
+          </div>
+
+          <!-- Step 04 -->
+          <div class="ds-pipeline-step">
+            <span class="ds-port ds-port--in is-connected" aria-hidden="true"></span>
+            <div class="ds-step-top">
+              <span class="ds-step-badge">Step 04</span>
+              <span class="ds-step-pct">100%</span>
+            </div>
+            <div>
+              <h3 style="font-size: var(--text-h3); margin-block-end: var(--space-1);" data-i18n="pStep4Title">Power BI dashboard</h3>
+              <p style="font-size: var(--text-sm); color: var(--ink-muted);" data-i18n="pStep4Body">
+                Built core DAX measures (Total Retained, Total Attrition, Retention Rate, Attrition Rate) using a green retention and red attrition theme.
+              </p>
+            </div>
+            <div class="ds-step-meter">
+              <div class="ds-progress" aria-hidden="true">
+                <div class="ds-progress-fill" style="--progress: 1;"></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -335,16 +404,21 @@
               </div>
             </div>
 
-            <table class="ds-sr-only">
-              <caption>Attrition rate by overtime status</caption>
-              <thead>
-                <tr><th scope="col">Overtime status</th><th scope="col">Attrition rate</th></tr>
-              </thead>
-              <tbody>
-                <tr><td>With overtime</td><td>31%</td></tr>
-                <tr><td>Without overtime</td><td>10%</td></tr>
-              </tbody>
-            </table>
+            <div class="ds-sr-only">
+              <table>
+                <caption data-i18n="srTbl1Cap">Attrition rate by overtime status</caption>
+                <thead>
+                  <tr>
+                    <th scope="col" data-i18n="srTbl1Col1">Overtime status</th>
+                    <th scope="col" data-i18n="srTbl1Col2">Attrition rate</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td data-i18n="srOtYes">With overtime</td><td>31%</td></tr>
+                  <tr><td data-i18n="srOtNo">Without overtime</td><td>10%</td></tr>
+                </tbody>
+              </table>
+            </div>
           </article>
 
           <!-- Finding 2: Monthly Income Gap -->
@@ -380,16 +454,21 @@
               </div>
             </div>
 
-            <table class="ds-sr-only">
-              <caption>Average monthly income by attrition status</caption>
-              <thead>
-                <tr><th scope="col">Group</th><th scope="col">Average monthly income</th></tr>
-              </thead>
-              <tbody>
-                <tr><td>Employees who left</td><td>4,787.09</td></tr>
-                <tr><td>Employees who stayed</td><td>6,832.74</td></tr>
-              </tbody>
-            </table>
+            <div class="ds-sr-only">
+              <table>
+                <caption data-i18n="srTbl2Cap">Average monthly income by attrition status</caption>
+                <thead>
+                  <tr>
+                    <th scope="col" data-i18n="srTbl2Col1">Group</th>
+                    <th scope="col" data-i18n="srTbl2Col2">Average monthly income</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td data-i18n="srIncLeft">Employees who left</td><td>4,787.09</td></tr>
+                  <tr><td data-i18n="srIncStayed">Employees who stayed</td><td>6,832.74</td></tr>
+                </tbody>
+              </table>
+            </div>
           </article>
 
           <!-- Finding 3: Sales Representative 39.76% & R&D Headcount 961 -->
@@ -713,7 +792,7 @@
         <button type="button" class="ds-btn ds-btn-secondary" id="ds-lightbox-close" data-i18n="closeBtn">Close (Esc)</button>
       </div>
       <div class="ds-lightbox-body">
-        <img id="ds-lightbox-img" src="" alt="">
+        <img id="ds-lightbox-img" alt="">
       </div>
     </div>
   </div>
@@ -779,10 +858,20 @@
         f1Note: "Overtime status produces the sharpest binary split in employee turnover across the dataset.",
         otYes: "With overtime",
         otNo: "Without overtime",
+        srTbl1Cap: "Attrition rate by overtime status",
+        srTbl1Col1: "Overtime status",
+        srTbl1Col2: "Attrition rate",
+        srOtYes: "With overtime",
+        srOtNo: "Without overtime",
         f2Title: "Employees who left earned a substantially lower average monthly income (4,787.09) than employees who stayed (6,832.74).",
         f2Note: "Compared against the overall company average monthly income of 6,502.93 across 1,470 employees.",
         incLeft: "Employees who left (Attrition)",
         incStayed: "Employees who stayed (Retained)",
+        srTbl2Cap: "Average monthly income by attrition status",
+        srTbl2Col1: "Group",
+        srTbl2Col2: "Average monthly income",
+        srIncLeft: "Employees who left",
+        srIncStayed: "Employees who stayed",
         f3Title: "Sales Representative records the highest attrition rate at 39.76% (nearly double the next highest role), while R&D is the largest department (961 employees) without having the highest attrition.",
         f3Callout1: "Attrition rate for Sales Representatives—nearly double the second-highest job role in the organization.",
         f3Callout2: "Employees in Research & Development, making it the largest department by headcount while maintaining lower attrition than Sales.",
@@ -849,10 +938,20 @@
         f1Note: "يمثل العمل الإضافي الفارق الثنائي الأبرز في معدلات التسرب الوظيفي عبر مجموعة البيانات.",
         otYes: "مع عمل إضافي (Overtime)",
         otNo: "بدون عمل إضافي",
+        srTbl1Cap: "معدل التسرب الوظيفي حسب حالة العمل الإضافي",
+        srTbl1Col1: "حالة العمل الإضافي",
+        srTbl1Col2: "معدل التسرب الوظيفي",
+        srOtYes: "مع عمل إضافي",
+        srOtNo: "بدون عمل إضافي",
         f2Title: "حصل الموظفون المغادرون على متوسط دخل شهري أقل بشكل ملحوظ (4,787.09) مقارنة بالموظفين الباقين (6,832.74).",
         f2Note: "مقارنة بمتوسط الدخل الشهري العام البالغ 6,502.93 عبر جميع الموظفين البالغ عددهم 1,470 موظفاً.",
         incLeft: "الموظفون المغادرون (Attrition)",
         incStayed: "الموظفون الباقون (Retained)",
+        srTbl2Cap: "متوسط الدخل الشهري حسب حالة التسرب الوظيفي",
+        srTbl2Col1: "الفئة",
+        srTbl2Col2: "متوسط الدخل الشهري",
+        srIncLeft: "الموظفون المغادرون",
+        srIncStayed: "الموظفون الباقون",
         f3Title: "يسجل دور ممثل المبيعات (Sales Representative) أعلى معدل تسرب وظيفي بنسبة 39.76% (ضعف أعلى دور يليه تقريباً)، بينما يضم قسم البحث والتطوير (R&D) أكبر عدد موظفين (961) دون أن يسجل أعلى تسرب.",
         f3Callout1: "معدل التسرب الوظيفي لفئة Sales Representative، وهو ما يقارب ضعف ثاني أعلى مسمى وظيفي في الشركة.",
         f3Callout2: "عدد الموظفين في قسم Research & Development بصفته القسم الأكبر حجماً مع بقاء معدل تسربه أقل من المبيعات.",
