@@ -236,7 +236,7 @@
     </section>
 
     <!-- ======================================================================
-         3. ANALYSIS PIPELINE (4 STEPS WITH NUMBERING)
+         3. ANALYSIS PIPELINE (4 CONNECTED NODES WITH PORTS & PROGRESS METERS)
          ====================================================================== -->
     <section class="ds-section" id="sec-pipeline" aria-labelledby="pipe-title">
       <div class="ds-container">
@@ -247,42 +247,111 @@
           </p>
         </div>
 
-        <svg class="ds-connector" data-scroll-fill viewBox="0 0 800 24" preserveAspectRatio="none" style="inline-size: 100%; block-size: 24px; margin-block-end: var(--space-3);" aria-hidden="true">
-          <line class="ds-connector-base" x1="0" y1="12" x2="800" y2="12"></line>
-          <line class="ds-connector-fill" x1="0" y1="12" x2="800" y2="12"></line>
-        </svg>
-
         <div class="ds-pipeline-row">
+          <!-- Step 01 -->
           <div class="ds-pipeline-step">
-            <span class="ds-step-badge">Step 01</span>
-            <h3 style="font-size: var(--text-h3);" data-i18n="pStep1Title">Raw CSV</h3>
-            <p style="font-size: var(--text-sm); color: var(--ink-muted);" data-i18n="pStep1Body">
-              Loaded 25,000 shipment rows and audited identifier uniqueness, shipment statuses, distance, weight, and timing columns.
-            </p>
+            <span class="ds-port ds-port--out is-connected" aria-hidden="true"></span>
+            <div class="ds-step-top">
+              <span class="ds-step-badge">Step 01</span>
+              <span class="ds-step-pct">25%</span>
+            </div>
+            <div>
+              <h3 style="font-size: var(--text-h3); margin-block-end: var(--space-1);" data-i18n="pStep1Title">Raw CSV</h3>
+              <p style="font-size: var(--text-sm); color: var(--ink-muted);" data-i18n="pStep1Body">
+                Loaded 25,000 shipment rows and audited identifier uniqueness, shipment statuses, distance, weight, and timing columns.
+              </p>
+            </div>
+            <div class="ds-step-meter">
+              <div class="ds-progress" aria-hidden="true">
+                <div class="ds-progress-fill" style="--progress: 0.25;"></div>
+              </div>
+            </div>
           </div>
 
-          <div class="ds-pipeline-step">
-            <span class="ds-step-badge">Step 02</span>
-            <h3 style="font-size: var(--text-h3);" data-i18n="pStep2Title">Excel cleaning</h3>
-            <p style="font-size: var(--text-sm); color: var(--ink-muted);" data-i18n="pStep2Body">
-              Standardized fields in Excel, preserved the original dataset untouched, and flagged zeroed time columns before analysis.
-            </p>
+          <!-- Connector 01 -> 02 -->
+          <div class="ds-pipeline-link" aria-hidden="true">
+            <svg class="ds-connector" data-scroll-fill data-connector-index="0" viewBox="0 0 34 24">
+              <line class="ds-connector-base" x1="0" y1="12" x2="34" y2="12"></line>
+              <line class="ds-connector-fill" x1="0" y1="12" x2="34" y2="12"></line>
+            </svg>
           </div>
 
+          <!-- Step 02 -->
           <div class="ds-pipeline-step">
-            <span class="ds-step-badge">Step 03</span>
-            <h3 style="font-size: var(--text-h3);" data-i18n="pStep3Title">PostgreSQL</h3>
-            <p style="font-size: var(--text-sm); color: var(--ink-muted);" data-i18n="pStep3Body">
-              Created a relational table with a serial primary key and executed 9 analytical queries covering delays, costs, ratings, and distance bands.
-            </p>
+            <span class="ds-port ds-port--in is-connected" aria-hidden="true"></span>
+            <span class="ds-port ds-port--out is-connected" aria-hidden="true"></span>
+            <div class="ds-step-top">
+              <span class="ds-step-badge">Step 02</span>
+              <span class="ds-step-pct">50%</span>
+            </div>
+            <div>
+              <h3 style="font-size: var(--text-h3); margin-block-end: var(--space-1);" data-i18n="pStep2Title">Excel cleaning</h3>
+              <p style="font-size: var(--text-sm); color: var(--ink-muted);" data-i18n="pStep2Body">
+                Standardized fields in Excel, preserved the original dataset untouched, and flagged zeroed time columns before analysis.
+              </p>
+            </div>
+            <div class="ds-step-meter">
+              <div class="ds-progress" aria-hidden="true">
+                <div class="ds-progress-fill" style="--progress: 0.50;"></div>
+              </div>
+            </div>
           </div>
 
+          <!-- Connector 02 -> 03 -->
+          <div class="ds-pipeline-link" aria-hidden="true">
+            <svg class="ds-connector" data-scroll-fill data-connector-index="1" viewBox="0 0 34 24">
+              <line class="ds-connector-base" x1="0" y1="12" x2="34" y2="12"></line>
+              <line class="ds-connector-fill" x1="0" y1="12" x2="34" y2="12"></line>
+            </svg>
+          </div>
+
+          <!-- Step 03 -->
           <div class="ds-pipeline-step">
-            <span class="ds-step-badge">Step 04</span>
-            <h3 style="font-size: var(--text-h3);" data-i18n="pStep4Title">Excel dashboard</h3>
-            <p style="font-size: var(--text-sm); color: var(--ink-muted);" data-i18n="pStep4Body">
-              Built Pivot Tables and an interactive dashboard with slicers for Delivery Partner, Region, and Delivery Mode.
-            </p>
+            <span class="ds-port ds-port--in is-connected" aria-hidden="true"></span>
+            <span class="ds-port ds-port--out is-connected" aria-hidden="true"></span>
+            <div class="ds-step-top">
+              <span class="ds-step-badge">Step 03</span>
+              <span class="ds-step-pct">75%</span>
+            </div>
+            <div>
+              <h3 style="font-size: var(--text-h3); margin-block-end: var(--space-1);" data-i18n="pStep3Title">PostgreSQL</h3>
+              <p style="font-size: var(--text-sm); color: var(--ink-muted);" data-i18n="pStep3Body">
+                Created a relational table with a serial primary key and executed 9 analytical queries covering delays, costs, ratings, and distance bands.
+              </p>
+            </div>
+            <div class="ds-step-meter">
+              <div class="ds-progress" aria-hidden="true">
+                <div class="ds-progress-fill" style="--progress: 0.75;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Connector 03 -> 04 -->
+          <div class="ds-pipeline-link" aria-hidden="true">
+            <svg class="ds-connector" data-scroll-fill data-connector-index="2" viewBox="0 0 34 24">
+              <line class="ds-connector-base" x1="0" y1="12" x2="34" y2="12"></line>
+              <line class="ds-connector-fill" x1="0" y1="12" x2="34" y2="12"></line>
+            </svg>
+          </div>
+
+          <!-- Step 04 -->
+          <div class="ds-pipeline-step">
+            <span class="ds-port ds-port--in is-connected" aria-hidden="true"></span>
+            <div class="ds-step-top">
+              <span class="ds-step-badge">Step 04</span>
+              <span class="ds-step-pct">100%</span>
+            </div>
+            <div>
+              <h3 style="font-size: var(--text-h3); margin-block-end: var(--space-1);" data-i18n="pStep4Title">Excel dashboard</h3>
+              <p style="font-size: var(--text-sm); color: var(--ink-muted);" data-i18n="pStep4Body">
+                Built Pivot Tables and an interactive dashboard with slicers for Delivery Partner, Region, and Delivery Mode.
+              </p>
+            </div>
+            <div class="ds-step-meter">
+              <div class="ds-progress" aria-hidden="true">
+                <div class="ds-progress-fill" style="--progress: 1;"></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -355,18 +424,23 @@
               </div>
             </div>
 
-            <table class="ds-sr-only">
-              <caption>Delay rate by weather condition</caption>
-              <thead>
-                <tr><th scope="col">Weather condition</th><th scope="col">Delay rate</th></tr>
-              </thead>
-              <tbody>
-                <tr><td>Stormy</td><td>41.45%</td></tr>
-                <tr><td>Rainy</td><td>37.35%</td></tr>
-                <tr><td>Clear</td><td>17.43%</td></tr>
-                <tr><td>Cold</td><td>16.02%</td></tr>
-              </tbody>
-            </table>
+            <div class="ds-sr-only">
+              <table>
+                <caption data-i18n="srTbl1Cap">Delay rate by weather condition</caption>
+                <thead>
+                  <tr>
+                    <th scope="col" data-i18n="srTbl1Col1">Weather condition</th>
+                    <th scope="col" data-i18n="srTbl1Col2">Delay rate</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td data-i18n="srWeatherStormy">Stormy</td><td>41.45%</td></tr>
+                  <tr><td data-i18n="srWeatherRainy">Rainy</td><td>37.35%</td></tr>
+                  <tr><td data-i18n="srWeatherClear">Clear</td><td>17.43%</td></tr>
+                  <tr><td data-i18n="srWeatherCold">Cold</td><td>16.02%</td></tr>
+                </tbody>
+              </table>
+            </div>
           </article>
 
           <!-- Finding 2: Shipment Status Counts -->
@@ -376,7 +450,7 @@
                 Across 25,000 shipments, 18,331 were delivered, 5,341 were delayed, and 1,328 failed.
               </h3>
               <p class="ds-finding-note" data-i18n="f2Note">
-                Shipment counts grouped by final delivery status (overall delay rate in the dataset is 26.68%).
+                Shipment counts grouped by final delivery status.
               </p>
             </div>
 
@@ -412,17 +486,22 @@
               </div>
             </div>
 
-            <table class="ds-sr-only">
-              <caption>Shipment count by status</caption>
-              <thead>
-                <tr><th scope="col">Status</th><th scope="col">Shipments</th></tr>
-              </thead>
-              <tbody>
-                <tr><td>Delivered</td><td>18,331</td></tr>
-                <tr><td>Delayed</td><td>5,341</td></tr>
-                <tr><td>Failed</td><td>1,328</td></tr>
-              </tbody>
-            </table>
+            <div class="ds-sr-only">
+              <table>
+                <caption data-i18n="srTbl2Cap">Shipment count by status</caption>
+                <thead>
+                  <tr>
+                    <th scope="col" data-i18n="srTbl2Col1">Status</th>
+                    <th scope="col" data-i18n="srTbl2Col2">Shipments</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td data-i18n="srStatusDelivered">Delivered</td><td>18,331</td></tr>
+                  <tr><td data-i18n="srStatusDelayed">Delayed</td><td>5,341</td></tr>
+                  <tr><td data-i18n="srStatusFailed">Failed</td><td>1,328</td></tr>
+                </tbody>
+              </table>
+            </div>
           </article>
 
           <!-- Finding 3: Distance vs Delivery Cost -->
@@ -458,16 +537,21 @@
               </div>
             </div>
 
-            <table class="ds-sr-only">
-              <caption>Average delivery cost by distance band</caption>
-              <thead>
-                <tr><th scope="col">Distance band</th><th scope="col">Average delivery cost</th></tr>
-              </thead>
-              <tbody>
-                <tr><td>0–50 km</td><td>239.64</td></tr>
-                <tr><td>200+ km</td><td>1,365.76</td></tr>
-              </tbody>
-            </table>
+            <div class="ds-sr-only">
+              <table>
+                <caption data-i18n="srTbl3Cap">Average delivery cost by distance band</caption>
+                <thead>
+                  <tr>
+                    <th scope="col" data-i18n="srTbl3Col1">Distance band</th>
+                    <th scope="col" data-i18n="srTbl3Col2">Average delivery cost</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td data-i18n="srBandShort">0–50 km</td><td>239.64</td></tr>
+                  <tr><td data-i18n="srBandLong">200+ km</td><td>1,365.76</td></tr>
+                </tbody>
+              </table>
+            </div>
           </article>
 
           <!-- Finding 4: Partner/Vehicle Parity & Express Rating -->
@@ -481,7 +565,7 @@
             <div class="ds-callout">
               <span class="ds-callout-num">28.93% – 31.72%</span>
               <p class="ds-callout-text" data-i18n="f4Callout1">
-                Delay rate range across the top 10 delivery partner and vehicle combinations; no single combination stands out, and shipment distance does not explain delays.
+                Delay rate range across the top 10 delivery partner and vehicle combinations; no single combination stands out.
               </p>
             </div>
 
@@ -704,7 +788,7 @@
         <button type="button" class="ds-btn ds-btn-secondary" id="ds-lightbox-close" data-i18n="closeBtn">Close (Esc)</button>
       </div>
       <div class="ds-lightbox-body">
-        <img id="ds-lightbox-img" src="" alt="">
+        <img id="ds-lightbox-img" alt="">
       </div>
     </div>
   </div>
@@ -772,17 +856,35 @@
         wRainy: "Rainy weather",
         wClear: "Clear weather",
         wCold: "Cold weather",
+        srTbl1Cap: "Delay rate by weather condition",
+        srTbl1Col1: "Weather condition",
+        srTbl1Col2: "Delay rate",
+        srWeatherStormy: "Stormy",
+        srWeatherRainy: "Rainy",
+        srWeatherClear: "Clear",
+        srWeatherCold: "Cold",
         f2Title: "Across 25,000 shipments, 18,331 were delivered, 5,341 were delayed, and 1,328 failed.",
-        f2Note: "Shipment counts grouped by final delivery status (overall delay rate in the dataset is 26.68%).",
+        f2Note: "Shipment counts grouped by final delivery status.",
         stDelivered: "Delivered",
         stDelayed: "Delayed",
         stFailed: "Failed",
+        srTbl2Cap: "Shipment count by status",
+        srTbl2Col1: "Status",
+        srTbl2Col2: "Shipments",
+        srStatusDelivered: "Delivered",
+        srStatusDelayed: "Delayed",
+        srStatusFailed: "Failed",
         f3Title: "Average delivery cost scales linearly with distance, rising from 239.64 (0–50 km) to 1,365.76 (200+ km).",
         f3Note: "Overall average delivery cost is 864.94 across an average shipment distance of 150.39 km and average weight of 25.15 kg.",
         distShort: "0–50 km distance band",
         distLong: "200+ km distance band",
+        srTbl3Cap: "Average delivery cost by distance band",
+        srTbl3Col1: "Distance band",
+        srTbl3Col2: "Average delivery cost",
+        srBandShort: "0–50 km",
+        srBandLong: "200+ km",
         f4Title: "Top partner and vehicle combinations cluster between 28.93% and 31.72% delay rates, while Express mode receives the lowest rating at 2.72/5.",
-        f4Callout1: "Delay rate range across the top 10 delivery partner and vehicle combinations; no single combination stands out, and shipment distance does not explain delays.",
+        f4Callout1: "Delay rate range across the top 10 delivery partner and vehicle combinations; no single combination stands out.",
         f4Callout2: "Lowest average rating recorded for Express delivery compared to the 3.67/5 overall average (higher customer expectations for expedited shipping is a possible explanation).",
         dashTitle: "Interactive dashboard",
         dashDesc: "Click the dashboard frame to inspect full-size charts and slicers (Delivery Partner, Region, and Delivery Mode). Press Esc to close.",
@@ -842,17 +944,35 @@
         wRainy: "الطقس الممطر (Rainy)",
         wClear: "الطقس الصافي (Clear)",
         wCold: "الطقس البارد (Cold)",
+        srTbl1Cap: "معدل التأخير حسب حالة الطقس",
+        srTbl1Col1: "حالة الطقس",
+        srTbl1Col2: "معدل التأخير",
+        srWeatherStormy: "عاصف",
+        srWeatherRainy: "ممطر",
+        srWeatherClear: "صافي",
+        srWeatherCold: "بارد",
         f2Title: "من بين 25,000 شحنة، تم تسليم 18,331 شحنة بنجاح، وتأخرت 5,341 شحنة، وفشلت 1,328 شحنة.",
-        f2Note: "توزيع أعداد الشحنات حسب حالة التسليم النهائية (معدل التأخير الإجمالي في البيانات هو 26.68%).",
+        f2Note: "توزيع أعداد الشحنات حسب حالة التسليم النهائية.",
         stDelivered: "تم التسليم (Delivered)",
         stDelayed: "متأخرة (Delayed)",
         stFailed: "فشلت (Failed)",
+        srTbl2Cap: "عدد الشحنات حسب الحالة",
+        srTbl2Col1: "الحالة",
+        srTbl2Col2: "الشحنات",
+        srStatusDelivered: "تم التسليم",
+        srStatusDelayed: "متأخرة",
+        srStatusFailed: "فشلت",
         f3Title: "ترتفع تكلفة التوصيل خطياً مع المسافة، من 239.64 لشريحة (0–50 كم) إلى 1,365.76 لشريحة (200+ كم).",
         f3Note: "يبلغ متوسط تكلفة التوصيل العام 864.94 عبر متوسط مسافة 150.39 كم ومتوسط وزن 25.15 كجم.",
         distShort: "شريحة المسافة 0–50 كم",
         distLong: "شريحة المسافة 200+ كم",
+        srTbl3Cap: "متوسط تكلفة التوصيل حسب شريحة المسافة",
+        srTbl3Col1: "شريحة المسافة",
+        srTbl3Col2: "متوسط تكلفة التوصيل",
+        srBandShort: "0–50 كم",
+        srBandLong: "200+ كم",
         f4Title: "تتقارب أعلى 10 توليفات لشركاء التوصيل والمركبات بين 28.93% و31.72% في معدل التأخير، بينما يسجل الشحن السريع Express أقل تقييم عند 2.72/5.",
-        f4Callout1: "نطاق معدل التأخير لأعلى 10 توليفات من شركاء التوصيل والمركبات؛ لا توجد توليفة واحدة منفردة تتصدر التأخير، كما أن المسافة ليست سبباً للتأخير.",
+        f4Callout1: "نطاق معدل التأخير لأعلى 10 توليفات من شركاء التوصيل والمركبات؛ لا توجد توليفة واحدة منفردة تتصدر التأخير.",
         f4Callout2: "أقل متوسط تقييم مسجل لوضع الشحن السريع Express مقارنة بالمتوسط العام 3.67/5 (ارتفاع توقعات العملاء للشحن السريع يُعد تفسيراً محتملاً).",
         dashTitle: "لوحة المعلومات التفاعلية",
         dashDesc: "اضغط على إطار لوحة المعلومات لتكبير الرسوم البيانية وعوامل التصفية (شريك التوصيل، المنطقة، ووضع الشحن). اضغط Esc للإغلاق.",
