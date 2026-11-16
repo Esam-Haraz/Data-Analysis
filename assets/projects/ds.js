@@ -339,8 +339,21 @@
   }
 
   /* --------------------------------------------------------------------------
-     5. RADIAL SPIDER GRAPH (SVG RINGS + CONNECTORS + RTL MIRRORING)
+     5. RADIAL SPIDER GRAPH (SVG RINGS + CONNECTORS + PORTS + RTL MIRRORING)
      -------------------------------------------------------------------------- */
+  function ensureSpiderPort(svg, edgeIdx, role) {
+    let port = svg.querySelector(`.ds-spider-port[data-edge="${edgeIdx}"][data-port-role="${role}"]`);
+    if (!port) {
+      port = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+      port.setAttribute("class", "ds-spider-port");
+      port.setAttribute("data-edge", edgeIdx);
+      port.setAttribute("data-port-role", role);
+      port.setAttribute("r", "5");
+      svg.appendChild(port);
+    }
+    return port;
+  }
+
   function layoutSpiderGraph(animateConnect) {
     const canvas = document.getElementById("ds-spider-canvas");
     const svg = document.getElementById("ds-spider-svg");
@@ -406,6 +419,13 @@
       basePath.setAttribute("d", d);
       fillPath.setAttribute("d", d);
 
+      const startPort = ensureSpiderPort(svg, idx, "start");
+      const endPort = ensureSpiderPort(svg, idx, "end");
+      startPort.setAttribute("cx", startX.toFixed(1));
+      startPort.setAttribute("cy", startY.toFixed(1));
+      endPort.setAttribute("cx", endX.toFixed(1));
+      endPort.setAttribute("cy", endY.toFixed(1));
+
       const len = Math.ceil(fillPath.getTotalLength() || 320);
       fillPath.style.setProperty("--edge-len", String(len));
 
@@ -427,8 +447,14 @@
       const fillPath = svg.querySelector(`.ds-spider-edge-fill[data-edge="${idx}"]`);
       if (!fillPath) return;
 
-      const activate = () => fillPath.classList.add("is-active");
-      const deactivate = () => fillPath.classList.remove("is-active");
+      const activate = () => {
+        fillPath.classList.add("is-active");
+        svg.querySelectorAll(`.ds-spider-port[data-edge="${idx}"]`).forEach((p) => p.classList.add("is-active"));
+      };
+      const deactivate = () => {
+        fillPath.classList.remove("is-active");
+        svg.querySelectorAll(`.ds-spider-port[data-edge="${idx}"]`).forEach((p) => p.classList.remove("is-active"));
+      };
 
       branchEl.addEventListener("mouseenter", activate);
       branchEl.addEventListener("mouseleave", deactivate);
@@ -489,7 +515,7 @@
   }
 
   /* --------------------------------------------------------------------------
-     6. SCROLL PROGRESS, PROJECT RAIL & PIPELINE CONNECTORS
+     6. SCROLL PROGRESS, PROJECT RAIL & STEP-TO-STEP PIPELINE CONNECTORS
      -------------------------------------------------------------------------- */
   function setupScrollTracking() {
     const railNodes = Array.from(document.querySelectorAll(".ds-rail-node[data-target]"));
@@ -534,12 +560,22 @@
         });
       }
 
-      scrollConnectors.forEach((svgEl) => {
+      scrollConnectors.forEach((svgEl, idx) => {
         const path = svgEl.querySelector(".ds-connector-fill");
         if (!path) return;
+        if (REDUCED_MOTION) {
+          path.style.setProperty("--progress", "1");
+          svgEl.classList.add("is-filled");
+          return;
+        }
         const rect = svgEl.getBoundingClientRect();
-        const inView = rect.top < window.innerHeight * 0.85;
-        path.style.setProperty("--progress", inView || REDUCED_MOTION ? "1" : "0");
+        const seqIndex = Number(svgEl.getAttribute("data-connector-index") || idx);
+        const startTrigger = window.innerHeight * 0.90 - seqIndex * 32;
+        const fillSpan = Math.max(window.innerHeight * 0.28, 140);
+        const rawProgress = (startTrigger - rect.top) / fillSpan;
+        const clamped = Math.min(Math.max(rawProgress, 0), 1);
+        path.style.setProperty("--progress", clamped.toFixed(3));
+        svgEl.classList.toggle("is-filled", clamped >= 0.95);
       });
     }
 
