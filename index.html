@@ -332,7 +332,7 @@
     </section>
 
     <!-- ======================================================================
-         SECTION: HOW I WORK (4-NODE PIPELINE)
+         SECTION: HOW I WORK (4-NODE CONNECTED PIPELINE WITH PORTS)
          ====================================================================== -->
     <section class="ds-section" id="how-i-work" aria-labelledby="how-title">
       <div class="ds-container">
@@ -344,36 +344,110 @@
         </div>
 
         <div class="ds-pipeline-row">
+          <!-- Step 01 -->
           <div class="ds-pipeline-step">
-            <span class="ds-step-badge">Step 01</span>
-            <h3 style="font-size: var(--text-h3);" data-i18n="step1Title">Raw data</h3>
-            <p style="font-size: var(--text-sm); color: var(--ink-muted);" data-i18n="step1Body">
-              Inspect source CSV files, row counts, data types, and primary key integrity before writing queries.
-            </p>
+            <span class="ds-port ds-port--out is-connected" aria-hidden="true"></span>
+            <div class="ds-step-top">
+              <span class="ds-step-badge">Step 01</span>
+              <span class="ds-step-pct">25%</span>
+            </div>
+            <div>
+              <h3 style="font-size: var(--text-h3); margin-block-end: var(--space-1);" data-i18n="step1Title">Raw data</h3>
+              <p style="font-size: var(--text-sm); color: var(--ink-muted);" data-i18n="step1Body">
+                Inspect source CSV files, row counts, data types, and primary key integrity before writing queries.
+              </p>
+            </div>
+            <div class="ds-step-meter">
+              <div class="ds-progress" aria-hidden="true">
+                <div class="ds-progress-fill" style="--progress: 0.25;"></div>
+              </div>
+            </div>
           </div>
 
-          <div class="ds-pipeline-step">
-            <span class="ds-step-badge">Step 02</span>
-            <h3 style="font-size: var(--text-h3);" data-i18n="step2Title">Clean</h3>
-            <p style="font-size: var(--text-sm); color: var(--ink-muted);" data-i18n="step2Body">
-              Standardize fields in Excel or Power Query, resolve key issues, and record any unusable columns.
-            </p>
+          <!-- Connector 01 -> 02 -->
+          <div class="ds-pipeline-link" aria-hidden="true">
+            <svg class="ds-connector" data-scroll-fill data-connector-index="0" viewBox="0 0 34 24">
+              <line class="ds-connector-base" x1="0" y1="12" x2="34" y2="12"></line>
+              <line class="ds-connector-fill" x1="0" y1="12" x2="34" y2="12"></line>
+            </svg>
           </div>
 
+          <!-- Step 02 -->
           <div class="ds-pipeline-step">
-            <span class="ds-step-badge">Step 03</span>
-            <h3 style="font-size: var(--text-h3);" data-i18n="step3Title">Analyze</h3>
-            <p style="font-size: var(--text-sm); color: var(--ink-muted);" data-i18n="step3Body">
-              Run structured SQL queries and Pivot summaries to isolate patterns, segment differences, and outliers.
-            </p>
+            <span class="ds-port ds-port--in is-connected" aria-hidden="true"></span>
+            <span class="ds-port ds-port--out is-connected" aria-hidden="true"></span>
+            <div class="ds-step-top">
+              <span class="ds-step-badge">Step 02</span>
+              <span class="ds-step-pct">50%</span>
+            </div>
+            <div>
+              <h3 style="font-size: var(--text-h3); margin-block-end: var(--space-1);" data-i18n="step2Title">Clean</h3>
+              <p style="font-size: var(--text-sm); color: var(--ink-muted);" data-i18n="step2Body">
+                Standardize fields in Excel or Power Query, resolve key issues, and record any unusable columns.
+              </p>
+            </div>
+            <div class="ds-step-meter">
+              <div class="ds-progress" aria-hidden="true">
+                <div class="ds-progress-fill" style="--progress: 0.50;"></div>
+              </div>
+            </div>
           </div>
 
+          <!-- Connector 02 -> 03 -->
+          <div class="ds-pipeline-link" aria-hidden="true">
+            <svg class="ds-connector" data-scroll-fill data-connector-index="1" viewBox="0 0 34 24">
+              <line class="ds-connector-base" x1="0" y1="12" x2="34" y2="12"></line>
+              <line class="ds-connector-fill" x1="0" y1="12" x2="34" y2="12"></line>
+            </svg>
+          </div>
+
+          <!-- Step 03 -->
           <div class="ds-pipeline-step">
-            <span class="ds-step-badge">Step 04</span>
-            <h3 style="font-size: var(--text-h3);" data-i18n="step4Title">Dashboard</h3>
-            <p style="font-size: var(--text-sm); color: var(--ink-muted);" data-i18n="step4Body">
-              Present verified findings in focused Excel or Power BI dashboards with interactive filters.
-            </p>
+            <span class="ds-port ds-port--in is-connected" aria-hidden="true"></span>
+            <span class="ds-port ds-port--out is-connected" aria-hidden="true"></span>
+            <div class="ds-step-top">
+              <span class="ds-step-badge">Step 03</span>
+              <span class="ds-step-pct">75%</span>
+            </div>
+            <div>
+              <h3 style="font-size: var(--text-h3); margin-block-end: var(--space-1);" data-i18n="step3Title">Analyze</h3>
+              <p style="font-size: var(--text-sm); color: var(--ink-muted);" data-i18n="step3Body">
+                Run structured SQL queries and Pivot summaries to isolate patterns, segment differences, and outliers.
+              </p>
+            </div>
+            <div class="ds-step-meter">
+              <div class="ds-progress" aria-hidden="true">
+                <div class="ds-progress-fill" style="--progress: 0.75;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Connector 03 -> 04 -->
+          <div class="ds-pipeline-link" aria-hidden="true">
+            <svg class="ds-connector" data-scroll-fill data-connector-index="2" viewBox="0 0 34 24">
+              <line class="ds-connector-base" x1="0" y1="12" x2="34" y2="12"></line>
+              <line class="ds-connector-fill" x1="0" y1="12" x2="34" y2="12"></line>
+            </svg>
+          </div>
+
+          <!-- Step 04 -->
+          <div class="ds-pipeline-step">
+            <span class="ds-port ds-port--in is-connected" aria-hidden="true"></span>
+            <div class="ds-step-top">
+              <span class="ds-step-badge">Step 04</span>
+              <span class="ds-step-pct">100%</span>
+            </div>
+            <div>
+              <h3 style="font-size: var(--text-h3); margin-block-end: var(--space-1);" data-i18n="step4Title">Dashboard</h3>
+              <p style="font-size: var(--text-sm); color: var(--ink-muted);" data-i18n="step4Body">
+                Present verified findings in focused Excel or Power BI dashboards with interactive filters.
+              </p>
+            </div>
+            <div class="ds-step-meter">
+              <div class="ds-progress" aria-hidden="true">
+                <div class="ds-progress-fill" style="--progress: 1;"></div>
+              </div>
+            </div>
           </div>
         </div>
 
